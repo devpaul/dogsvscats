@@ -1,10 +1,18 @@
-# dogsvcats
+# Cat vs. Dogs
 
 This project was generated with the [Dojo CLI](https://github.com/dojo/cli) & [Dojo CLI create app command](https://github.com/dojo/cli-create-app).
 
+This app is a demo for a fun and not serious conference talk about JavaScript and tech debates and memes (e.g. tabs vs. spaces, classes vs. not), with the ultimate debate being whether we prefer cats or dogs.
+
+It will first be presented at the [November 2018 Phoenix TypeScript meetup](https://www.meetup.com/Phoenix-TypeScript/events/255940576/) and then at [HalfStack 2018](http://halfstackconf.com/). Slides and video links to be provided once they're available, as well as a link to the running application.
+
+The Cats vs. Dogs app leverages modern [Dojo](https://dojo.io/), Web Animation, WebAudio, and more for this simple demo app.
+
 ## Build
 
-Run `dojo build --mode dist` (the `mode` option defaults to `dist`) to create a production build for the project. The built artifacts will be stored in the `output/dist` directory.
+Clone the repository and then run `npm install`.
+
+Then run `dojo build --mode dist` (the `mode` option defaults to `dist`) to create a production build for the project. The built artifacts will be stored in the `output/dist` directory.
 
 ## Development Build
 
