@@ -8,7 +8,7 @@ import * as css from './styles/character.m.css';
  *
  * Properties that can be set on Animal components
  */
-export interface CharacterProperties { }
+export interface CharacterProperties {}
 
 export const ThemedBase = ThemedMixin(WidgetBase);
 

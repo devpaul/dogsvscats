@@ -14,7 +14,7 @@ const body = require('./assets/cat-body.png');
  *
  * Properties that can be set on Animal components
  */
-export interface CatContainerProperties { }
+export interface CatContainerProperties {}
 
 export const ThemedBase = ThemedMixin(WidgetBase);
 
@@ -24,7 +24,7 @@ export class CatContainer<P extends CatContainerProperties = CatContainerPropert
 		const key = 'cathead';
 		this.meta(WebAnimation).animate(key, headTilt('catHeadTilt'));
 
-		return v('div', { classes: css.root}, [
+		return v('div', { classes: css.root }, [
 			v('img', { key, src: head, classes: css.head }),
 			v('img', { src: body, classes: css.body })
 		]);

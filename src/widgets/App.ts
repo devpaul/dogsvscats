@@ -10,10 +10,10 @@ import * as css from './styles/App.m.css';
 export default class App extends WidgetBase {
 	protected render() {
 		return v('div', { classes: [css.root] }, [
-			v('header', { classes: [css.header]}, [
-				w(Button, { to: 'cat' }, [ 'Cats' ]),
-				v('p', {}, [ 'vs' ]),
-				w(Button, { to: 'dog' }, [ 'Dogs' ])
+			v('header', { classes: [css.header] }, [
+				w(Button, { to: 'cat' }, ['Cats']),
+				v('p', {}, ['vs']),
+				w(Button, { to: 'dog' }, ['Dogs'])
 			]),
 			w(Outlet, { key: 'cat', id: 'cat', renderer: () => w(CatContainer, {}) }),
 			w(Outlet, { key: 'dog', id: 'dog', renderer: () => w(DogContainer, {}) })
