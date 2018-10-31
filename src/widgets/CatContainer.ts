@@ -3,6 +3,8 @@ import { ThemedMixin, theme } from '@dojo/framework/widget-core/mixins/Themed';
 import { WidgetBase } from '@dojo/framework/widget-core/WidgetBase';
 import * as css from './styles/catContainer.m.css';
 import { v } from '@dojo/framework/widget-core/d';
+import WebAnimation from '@dojo/framework/widget-core/meta/WebAnimation';
+import { headTilt } from './util/animations';
 
 const head = require('./assets/cat-head.png');
 const body = require('./assets/cat-body.png');
@@ -19,9 +21,12 @@ export const ThemedBase = ThemedMixin(WidgetBase);
 @theme(css)
 export class CatContainer<P extends CatContainerProperties = CatContainerProperties> extends ThemedBase<P> {
 	protected render(): DNode | DNode[] {
-		return v('div', {}, [
-			v('img', { src: head }),
-			v('img', { src: body })
+		const key = 'cathead';
+		this.meta(WebAnimation).animate(key, headTilt('catHeadTilt'));
+
+		return v('div', { classes: css.root}, [
+			v('img', { key, src: head, classes: css.head }),
+			v('img', { src: body, classes: css.body })
 		]);
 	}
 }

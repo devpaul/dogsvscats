@@ -1,1 +1,9 @@
 .root { }
+
+.head {
+    position: absolute;
+}
+
+.body {
+    margin: 250px 0 0 108px;
+}
