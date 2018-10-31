@@ -1,20 +1,24 @@
 {
-  "name": "dogsvcats",
+  "name": "catsvsdogs",
   "version": "1.0.0",
   "dependencies": {
     "@dojo/framework": "^4.0.0",
     "@dojo/themes": "^4.0.0",
     "@dojo/widgets": "^4.0.0",
-    "tslib": "~1.8.1"
+    "tslib": "~1.8.1",
+    "web-animations-js": "2.3.1"
   },
   "devDependencies": {
-    "@dojo/cli-build-app": "^4.0.0",
+    "@dojo/cli": "^4.0.0",
+    "@dojo/cli-build-app": "^4.0.2",
     "@dojo/cli-create-widget": "^4.0.0",
-    "@dojo/cli-test-intern": "^4.0.0",
+    "@dojo/cli-test-intern": "^4.0.1",
     "@types/node": "~9.6.5",
-    "typescript": "~3.1.3"
+    "@types/web-animations-js": "2.2.6",
+    "typescript": "^3.1.4"
   },
   "scripts": {
+    "build": "dojo build app -m dev",
     "watch": "dojo build app -s -m dev -w memory"
   }
 }

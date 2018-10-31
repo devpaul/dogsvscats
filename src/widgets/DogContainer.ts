@@ -3,6 +3,8 @@ import { ThemedMixin, theme } from '@dojo/framework/widget-core/mixins/Themed';
 import { WidgetBase } from '@dojo/framework/widget-core/WidgetBase';
 import * as css from './styles/dogContainer.m.css';
 import { v } from '@dojo/framework/widget-core/d';
+import WebAnimation from '@dojo/framework/widget-core/meta/WebAnimation';
+import { headTilt } from './util/animations';
 
 const head = require('./assets/dog-head.png');
 const body = require('./assets/dog-body.png');
@@ -19,9 +21,12 @@ export const ThemedBase = ThemedMixin(WidgetBase);
 @theme(css)
 export class DogContainer<P extends DogContainerProperties = DogContainerProperties> extends ThemedBase<P> {
 	protected render(): DNode | DNode[] {
-		return v('div', {}, [
-			v('img', { src: head }),
-			v('img', { src: body })
+		const key = 'dogHead';
+		this.meta(WebAnimation).animate(key, headTilt('dogHeadTilt'));
+
+		return v('div', { classes: css.root }, [
+			v('img', { key, src: head, classes: css.head }),
+			v('img', { src: body, classes: css.body })
 		]);
 	}
 }
