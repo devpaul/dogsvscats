@@ -10,14 +10,14 @@ import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
 import * as css from './styles/Button.m.css';
 
 export interface ButtonLinkProperties extends LinkProperties {
-    selected?: boolean;
+	selected?: boolean;
 }
 
 @alwaysRender()
 export class Button extends WidgetBase<ButtonLinkProperties> {
-    private _handle: Handle | undefined;
+	private _handle: Handle | undefined;
 
-    @diffProperty('routerKey')
+	@diffProperty('routerKey')
 	protected onRouterKeyChange(current: ButtonLinkProperties, next: ButtonLinkProperties) {
 		const { routerKey = 'router' } = next;
 		const item = this.registry.getInjector<Router>(routerKey);
@@ -37,27 +37,27 @@ export class Button extends WidgetBase<ButtonLinkProperties> {
 		if (!this._handle) {
 			this.onRouterKeyChange(this.properties, this.properties);
 		}
-    }
+	}
 
-    protected render() {
-        const selected = this.isSelected();
+	protected render() {
+		const selected = this.isSelected();
 
-        return w(Link, { ... this.properties, classes: css.root }, [
-            v('div', { classes: [ css.container, selected ? css.selected : undefined ] }, this.children)
-        ]);
-    }
+		return w(Link, { ...this.properties, classes: css.root }, [
+			v('div', { classes: [css.container, selected ? css.selected : undefined] }, this.children)
+		]);
+	}
 
-    private isSelected() {
-        const { to, routerKey = 'router' } = this.properties;
+	private isSelected() {
+		const { to, routerKey = 'router' } = this.properties;
 		const item = this.registry.getInjector<Router>(routerKey);
 
 		if (item) {
 			const router = item.injector();
 			const outletContext = router.getOutlet(to);
 			if (outletContext) {
-                return true;
-            }
-        }
-        return false;
-    }
+				return true;
+			}
+		}
+		return false;
+	}
 }

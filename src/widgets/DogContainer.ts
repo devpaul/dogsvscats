@@ -14,7 +14,7 @@ const body = require('./assets/dog-body.png');
  *
  * Properties that can be set on Animal components
  */
-export interface DogContainerProperties { }
+export interface DogContainerProperties {}
 
 export const ThemedBase = ThemedMixin(WidgetBase);
 
