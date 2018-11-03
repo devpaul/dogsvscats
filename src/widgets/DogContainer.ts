@@ -8,13 +8,16 @@ import { headTilt } from './util/animations';
 
 const head = require('./assets/dog-head.png');
 const body = require('./assets/dog-body.png');
+// const sound = require('./assets/sounds/meow.mp3');
 
 /**
  * @type DogContainerProperties
  *
  * Properties that can be set on Animal components
  */
-export interface DogContainerProperties {}
+export interface DogContainerProperties {
+	onPlaySound?(audio: any): void;
+}
 
 export const ThemedBase = ThemedMixin(WidgetBase);
 
@@ -26,7 +29,16 @@ export class DogContainer<P extends DogContainerProperties = DogContainerPropert
 
 		return v('div', { classes: css.root }, [
 			v('img', { key, src: head, classes: css.head }),
-			v('img', { src: body, classes: css.body })
+			v('img', { src: body, classes: css.body }),
+			v('button', { onclick: this.onClick }, ['Woof'])
 		]);
+	}
+
+	private onClick() {
+		const { onPlaySound } = this.properties;
+
+		if (onPlaySound) {
+			onPlaySound('woof');
+		}
 	}
 }

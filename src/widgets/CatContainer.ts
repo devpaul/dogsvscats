@@ -8,13 +8,16 @@ import { headTilt } from './util/animations';
 
 const head = require('./assets/cat-head.png');
 const body = require('./assets/cat-body.png');
+// const sound = require('./assets/sounds/meow.mp3');
 
 /**
  * @type CatContainerProperties
  *
  * Properties that can be set on Animal components
  */
-export interface CatContainerProperties {}
+export interface CatContainerProperties {
+	onPlaySound?(audio: any): void;
+}
 
 export const ThemedBase = ThemedMixin(WidgetBase);
 
@@ -26,7 +29,16 @@ export class CatContainer<P extends CatContainerProperties = CatContainerPropert
 
 		return v('div', { classes: css.root }, [
 			v('img', { key, src: head, classes: css.head }),
-			v('img', { src: body, classes: css.body })
+			v('img', { src: body, classes: css.body }),
+			v('button', { onclick: this.onClick }, ['Meow'])
 		]);
+	}
+
+	private onClick() {
+		const { onPlaySound } = this.properties;
+
+		if (onPlaySound) {
+			onPlaySound('meow');
+		}
 	}
 }
