@@ -8,7 +8,6 @@ import { headTilt } from './util/animations';
 
 const head = require('./assets/dog-head.png');
 const body = require('./assets/dog-body.png');
-// const sound = require('./assets/sounds/meow.mp3');
 
 /**
  * @type DogContainerProperties

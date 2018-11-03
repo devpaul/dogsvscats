@@ -15,6 +15,7 @@
     "@dojo/cli-test-intern": "^4.0.1",
     "@types/node": "~9.6.5",
     "@types/web-animations-js": "2.2.6",
+    "gh-pages": "^2.0.1",
     "prettier": "^1.14.3",
     "typescript": "^3.1.4"
   },
