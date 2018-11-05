@@ -3,7 +3,7 @@ export class CoreAudio {
 
 	private audioMap = new Map<string, AudioBuffer>();
 
-	async play(sound: string) {
+	async play(sound: string, speed: number, onStop: () => void) {
 		if (!this.context) {
 			this.context = new AudioContext();
 		}
@@ -16,7 +16,14 @@ export class CoreAudio {
 		const source = this.context.createBufferSource();
 		source.buffer = await this.loadCached(sound);
 		source.connect(this.context.destination);
+		source.playbackRate.value = speed;
+		source.loop = true;
 		source.start(this.context.currentTime);
+
+		setTimeout(() => {
+			source.stop();
+			onStop();
+		}, 5000);
 
 		console.log(sound);
 	}
