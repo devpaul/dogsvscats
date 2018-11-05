@@ -1,28 +1,16 @@
 {
   "name": "catsvsdogs",
   "version": "1.0.0",
-  "dependencies": {
-    "@dojo/framework": "^4.0.0",
-    "@dojo/themes": "^4.0.0",
-    "@dojo/widgets": "^4.0.0",
-    "tslib": "~1.8.1",
-    "web-animations-js": "2.3.1"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@dojo/cli": "^4.0.0",
-    "@dojo/cli-build-app": "^4.0.2",
-    "@dojo/cli-create-widget": "^4.0.0",
-    "@dojo/cli-test-intern": "^4.0.1",
-    "@types/node": "~9.6.5",
-    "@types/web-animations-js": "2.2.6",
     "gh-pages": "^2.0.1",
-    "prettier": "^1.14.3",
-    "typescript": "^3.1.4"
+    "prettier": "^1.14.3"
   },
   "scripts": {
-    "build": "dojo build app -m dev",
-    "pretty": "prettier --write \"src/**/*.md\" \"src/**/*.ts\" \"tests/**/*.ts\"",
-    "watch": "dojo build app -s -m dev -w memory"
+    "build": "cd client && npm run build",
+    "install": "cd client && npm install && cd ../server && npm install",
+    "pretty": "prettier --write \"client/src/**/*.ts\" \"client/tests/**/*.ts\" \"server/src/**/*.ts\" \"server/tests/**/*.ts\"",
+    "start": "cd server && npm run start"
   },
   "prettier": {
     "singleQuote": true,

@@ -15,7 +15,7 @@ export default class App extends WidgetBase {
 		const coreAudio = this.coreAudio;
 		const onPlaySound = (sound: any) => {
 			coreAudio.play(sound);
-		}
+		};
 
 		return v('div', { classes: [css.root] }, [
 			v('header', { classes: [css.header] }, [
