@@ -1,0 +1,24 @@
+{
+	"compilerOptions": {
+		"declaration": false,
+		"downlevelIteration": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"lib": [
+			"es5",
+			"dom",
+			"dom.iterable",
+			"es2015.collection",
+			"es2015.promise",
+			"esnext.asynciterable"
+		],
+		"module": "umd",
+		"moduleResolution": "node",
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"removeComments": false,
+		"sourceMap": true,
+		"strict": true,
+		"target": "es5"
+	}
+}

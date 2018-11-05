@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Cats vs Dogs server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node ./src"
+  },
+  "author": "Paul Shannon",
+  "license": "GPL-2.0",
+  "devDependencies": {
+    "@nestjs/cli": "^5.5.0",
+    "@types/node": "^10.12.2",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.6"
+  },
+  "dependencies": {
+    "@nestjs/common": "^5.4.0",
+    "@nestjs/core": "^5.4.0",
+    "reflect-metadata": "^0.1.12",
+    "rxjs": "^6.3.3"
+  }
+}

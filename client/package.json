@@ -1,0 +1,34 @@
+{
+  "name": "catsvsdogs",
+  "version": "1.0.0",
+  "dependencies": {
+    "@dojo/framework": "^4.0.0",
+    "@dojo/themes": "^4.0.0",
+    "@dojo/widgets": "^4.0.0",
+    "tslib": "~1.8.1",
+    "web-animations-js": "2.3.1"
+  },
+  "devDependencies": {
+    "@dojo/cli": "^4.0.0",
+    "@dojo/cli-build-app": "^4.0.2",
+    "@dojo/cli-create-widget": "^4.0.0",
+    "@dojo/cli-test-intern": "^4.0.1",
+    "@types/node": "~9.6.5",
+    "@types/web-animations-js": "2.2.6",
+    "gh-pages": "^2.0.1",
+    "prettier": "^1.14.3",
+    "typescript": "^3.1.4"
+  },
+  "scripts": {
+    "build": "dojo build app -m dev",
+    "pretty": "prettier --write \"src/**/*.md\" \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "watch": "dojo build app -s -m dev -w memory"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "tabWidth": 4,
+    "useTabs": true,
+    "printWidth": 120,
+    "arrowParens": "always"
+  }
+}
