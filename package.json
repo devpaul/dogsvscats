@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "cd client && npm run build",
+    "install": "cd client && npm install && cd ../server && npm install",
     "pretty": "prettier --write \"src/**/*.md\" \"src/**/*.ts\" \"tests/**/*.ts\"",
     "start": "cd server && npm run start"
   },
