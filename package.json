@@ -1,15 +1,15 @@
 {
   "name": "catsvsdogs",
   "version": "1.0.0",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "gh-pages": "^2.0.1"
+    "gh-pages": "^2.0.1",
+    "prettier": "^1.14.3"
   },
   "scripts": {
     "build": "cd client && npm run build",
     "install": "cd client && npm install && cd ../server && npm install",
-    "pretty": "prettier --write \"src/**/*.md\" \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "pretty": "prettier --write \"client/src/**/*.ts\" \"client/tests/**/*.ts\" \"server/src/**/*.ts\" \"server/tests/**/*.ts\"",
     "start": "cd server && npm run start"
   },
   "prettier": {

@@ -9,6 +9,6 @@ async function bootstrap() {
 	app.useStaticAssets(join(__dirname, '../..', 'client', 'output', 'dev'));
 
 	await app.listen(PORT);
-	console.log(`server started on port ${ PORT }`);
+	console.log(`server started on port ${PORT}`);
 }
 bootstrap();

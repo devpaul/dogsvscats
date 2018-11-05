@@ -12,7 +12,7 @@ export interface Ballot {
 
 @Controller('api')
 export class AppController {
-	constructor(private readonly appService: AppService) { }
+	constructor(private readonly appService: AppService) {}
 
 	@Get()
 	tallies() {
@@ -23,8 +23,7 @@ export class AppController {
 	createRecord(@Body() ballot: unknown) {
 		if (isBallot(ballot)) {
 			this.appService.vote(ballot.uuid, ballot.subject);
-		}
-		else {
+		} else {
 			throw new HttpException('invalid ballot', HttpStatus.BAD_REQUEST);
 		}
 	}

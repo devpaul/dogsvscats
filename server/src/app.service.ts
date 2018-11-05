@@ -7,7 +7,7 @@ export interface Vote {
 }
 
 interface VoteData {
-	[ key: string ]: number;
+	[key: string]: number;
 }
 
 @Injectable()
@@ -33,7 +33,7 @@ export class AppService {
 
 	get(): VoteData {
 		const data: VoteData = {};
-		for (let [ subject, count ] of this.counts.entries()) {
+		for (let [subject, count] of this.counts.entries()) {
 			data[subject] = count;
 		}
 		return data;
