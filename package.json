@@ -4,12 +4,15 @@
   "dependencies": {},
   "devDependencies": {
     "gh-pages": "^2.0.1",
+    "now": "^11.5.2",
     "prettier": "^1.14.3"
   },
   "scripts": {
     "build": "cd client && npm run build",
+    "deploy": "now --public",
     "install": "cd client && npm install && cd ../server && npm install",
     "pretty": "prettier --write \"client/src/**/*.ts\" \"client/tests/**/*.ts\" \"server/src/**/*.ts\" \"server/tests/**/*.ts\"",
+    "publish": "npm run build && node ./support/publish",
     "start": "cd server && npm run start"
   },
   "prettier": {
