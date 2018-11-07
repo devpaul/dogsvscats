@@ -1,3 +1,5 @@
+const AudioContext = (<any> window).AudioContext || (<any> window).webkitAudioContext; // safari :\
+
 export class CoreAudio {
 	private context!: AudioContext;
 
