@@ -25,3 +25,8 @@
 .slider {
 	width: 500px;
 }
+
+.buttonContainer {
+	display: flex;
+	justify-content: center;
+}
