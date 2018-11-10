@@ -7,24 +7,22 @@ import * as css from './styles/app.m.css';
 import { CoreAudio } from './CoreAudio';
 import Slider from '@dojo/widgets/slider';
 
+declare type Animal = 'cat' | 'dog';
+
 export default class App extends WidgetBase {
 	private coreAudio = new CoreAudio();
-	private choice: string = '';
+	private choice?: Animal = undefined;
 	private excitedValue = 1;
-	private playing = false;
 
-	private _onChoiceClick(choice: string) {
+	private _onChoiceClick(choice: Animal) {
 		this.choice = choice;
 		this.invalidate();
 	}
 
 	private _onSpeakClick() {
-		this.playing = true;
-		this.coreAudio.play(this.choice, this.excitedValue, () => {
-			this.playing = false;
-			this.invalidate();
-		});
-		this.invalidate();
+		const { choice } = this;
+
+		this.coreAudio.play(choice!, this.excitedValue);
 	}
 
 	private _excitedChange(value: number) {
@@ -33,20 +31,20 @@ export default class App extends WidgetBase {
 	}
 
 	protected render() {
-
-		const { excitedValue, choice, playing } = this;
+		const { choice } = this;
 
 		return v('div', { classes: css.root }, [
-			v('header', { classes: css.header }, [
-				v('button', { classes: css.button, onclick: () => {
-					this._onChoiceClick('cat');
-				}}, [ 'Cats' ]),
-				v('p', {}, ['vs']),
-				v('button', { classes: css.button, onclick: () => {
-					this._onChoiceClick('dog');
-				}}, [ 'Dogs' ])
-			]),
-			this.choice ? v('div', { classes: css.controls }, [
+			this.renderHeader(),
+			this.choice ? this.renderCharacter(choice!) : undefined
+		]);
+	}
+
+	private renderCharacter(choice: Animal) {
+		const { excitedValue } = this;
+		const soundName = choice === 'cat' ? 'Meow' : 'Woof';
+
+		return v('div', [
+			v('div', { classes: css.controls }, [
 				w(Slider, {
 					extraClasses: { root: css.slider },
 					label: `How Excited is the ${choice}`,
@@ -55,15 +53,32 @@ export default class App extends WidgetBase {
 					max: 3,
 					step: 0.1,
 					onChange: this._excitedChange
-				}),
+				})
+			]),
+			choice === 'cat' ? w(Cat, { animationSpeed: excitedValue }) : w(Dog, { animationSpeed: excitedValue }),
+			v('div', { classes: css.buttonContainer }, [
 				v('button', {
 					classes: css.button,
-					onclick: this._onSpeakClick,
-					disabled: playing
-				}, [ 'Speak' ])
-			]) : undefined,
-			this.choice === 'cat' ? w(Cat, { animationSpeed: excitedValue }) : undefined,
-			this.choice === 'dog' ? w(Dog, { animationSpeed: excitedValue }) : undefined
+					onclick: this._onSpeakClick
+				}, [ soundName ])
+			])
+		]);
+	}
+
+
+	private renderHeader() {
+		return v('header', {classes: css.header}, [
+			v('button', {
+				classes: css.button, onclick: () => {
+					this._onChoiceClick('cat');
+				}
+			}, ['Cats']),
+			v('p', {}, ['vs']),
+			v('button', {
+				classes: css.button, onclick: () => {
+					this._onChoiceClick('dog');
+				}
+			}, ['Dogs'])
 		]);
 	}
 }
