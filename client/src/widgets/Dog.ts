@@ -14,15 +14,10 @@ export interface DogProperties {
 
 @theme(css)
 export class Dog extends ThemedMixin(WidgetBase)<DogProperties> {
-
 	private _getHeadAnimation(animationSpeed: number) {
 		return {
 			id: 'dog-head',
-			effects: [
-				{ marginBottom: '0px' },
-				{ marginBottom: '5px' },
-				{ marginBottom: '0px' }
-			] as any,
+			effects: [{ marginBottom: '0px' }, { marginBottom: '5px' }, { marginBottom: '0px' }] as any,
 			timing: {
 				duration: 800,
 				iterations: Infinity
@@ -37,11 +32,7 @@ export class Dog extends ThemedMixin(WidgetBase)<DogProperties> {
 	private _getTailAnimation(animationSpeed: number) {
 		return {
 			id: 'dog-tail',
-			effects: [
-				{ transform: 'rotate(10deg)' },
-				{ transform: 'rotate(-10deg)' },
-				{ transform: 'rotate(10deg)' }
-			],
+			effects: [{ transform: 'rotate(10deg)' }, { transform: 'rotate(-10deg)' }, { transform: 'rotate(10deg)' }],
 			timing: {
 				duration: 1000,
 				iterations: Infinity
