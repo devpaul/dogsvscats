@@ -13,15 +13,10 @@ export interface CatProperties {
 }
 
 export class Cat extends ThemedMixin(WidgetBase)<CatProperties> {
-
 	private _getHeadAnimation(animationSpeed: number) {
 		return {
 			id: 'cat-head',
-			effects: [
-				{ marginBottom: '0px' },
-				{ marginBottom: '5px' },
-				{ marginBottom: '0px' }
-			] as any,
+			effects: [{ marginBottom: '0px' }, { marginBottom: '5px' }, { marginBottom: '0px' }] as any,
 			timing: {
 				duration: 800,
 				iterations: Infinity
@@ -36,11 +31,7 @@ export class Cat extends ThemedMixin(WidgetBase)<CatProperties> {
 	private _getTailAnimation(animationSpeed: number) {
 		return {
 			id: 'cat-tail',
-			effects: [
-				{ transform: 'rotate(0deg)' },
-				{ transform: 'rotate(-10deg)' },
-				{ transform: 'rotate(0deg)' }
-			],
+			effects: [{ transform: 'rotate(0deg)' }, { transform: 'rotate(-10deg)' }, { transform: 'rotate(0deg)' }],
 			timing: {
 				duration: 1000,
 				iterations: Infinity

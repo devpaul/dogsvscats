@@ -1,0 +1,9 @@
+.root {
+	display: flex;
+	justify-content: center;
+}
+
+.voteContainer {
+	display: flex;
+	flex-direction: column;
+}

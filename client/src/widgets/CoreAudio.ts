@@ -1,11 +1,11 @@
-const AudioContext = (<any> window).AudioContext || (<any> window).webkitAudioContext; // safari :\
+const AudioContext = (<any>window).AudioContext || (<any>window).webkitAudioContext; // safari :\
 
 export class CoreAudio {
 	private context!: AudioContext;
 
 	private audioMap = new Map<string, AudioBuffer>();
 
-	async play(sound: string, speed: number) {
+	async play(sound: string, speed: number = 1) {
 		if (!this.context) {
 			this.context = new AudioContext();
 		}
@@ -15,6 +15,7 @@ export class CoreAudio {
 			this.context.resume();
 		}
 
+		speed = Math.max(Math.min(speed, 2), 0.5);
 		const buffer = await this.loadCached(sound);
 		const source = this.context.createBufferSource();
 		source.buffer = buffer;
@@ -42,11 +43,10 @@ export class CoreAudio {
 		const audioData = await result.arrayBuffer();
 		if (this.context.decodeAudioData.length === 1) {
 			return await this.context.decodeAudioData(audioData);
-		}
-		else {
+		} else {
 			return await new Promise<AudioBuffer>((resolve, reject) => {
 				this.context.decodeAudioData(audioData, resolve, reject);
-			})
+			});
 		}
 	}
 }

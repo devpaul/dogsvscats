@@ -6,6 +6,7 @@ const PORT = 3000;
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
+	app.enableCors();
 	app.useStaticAssets(join(__dirname, '../..', 'client', 'output', 'dev'));
 
 	await app.listen(PORT);
