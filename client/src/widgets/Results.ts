@@ -9,10 +9,23 @@ import { Dog } from './Dog';
 export interface ResultsProperties {
 	catCount: number;
 	dogCount: number;
+	fetchResults: () => void;
 }
 
 @theme(css)
 export class Results extends ThemedMixin(WidgetBase)<ResultsProperties> {
+	private _interval: any;
+
+	protected onAttach() {
+		const { fetchResults } = this.properties;
+		fetchResults();
+		this._interval = setInterval(fetchResults, 3000);
+	}
+
+	protected onDetach() {
+		clearInterval(this._interval);
+	}
+
 	protected render() {
 		const { catCount, dogCount } = this.properties;
 

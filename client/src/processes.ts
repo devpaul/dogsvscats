@@ -34,7 +34,7 @@ function isResults(value: any): value is State['results'] {
 }
 
 const fetchResults = commandFactory(async ({ get, path }) => {
-	const response = await fetch(url, { method: 'GET' });
+	const response = await fetch(`${url}?cb=${Date.now()}`, { method: 'GET' });
 	const results: unknown = await response.json();
 
 	if (response.ok && isResults(results)) {
