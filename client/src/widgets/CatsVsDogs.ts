@@ -3,7 +3,7 @@ import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
 
 import { Cat } from './Cat';
 import { Dog } from './Dog';
-import * as css from './styles/app.m.css';
+import * as css from './styles/catsVsDogs.m.css';
 import { CoreAudio } from './CoreAudio';
 import Slider from '@dojo/widgets/slider';
 import { Animal } from '../interfaces';

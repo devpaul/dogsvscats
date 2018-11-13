@@ -9,7 +9,8 @@ const body = require('./assets/cat-body.png');
 const tail = require('./assets/cat-tail.png');
 
 export interface CatProperties {
-	animationSpeed: number;
+	animationSpeed?: number;
+	small?: boolean;
 }
 
 export class Cat extends ThemedMixin(WidgetBase)<CatProperties> {
@@ -52,12 +53,12 @@ export class Cat extends ThemedMixin(WidgetBase)<CatProperties> {
 	}
 
 	protected render() {
-		const { animationSpeed } = this.properties;
+		const { animationSpeed = 1, small } = this.properties;
 
 		this.meta(WebAnimation).animate('cat-head', this._getHeadAnimation(animationSpeed));
 		this.meta(WebAnimation).animate('cat-tail', this._getTailAnimation(animationSpeed));
 
-		return v('div', { classes: css.root }, [
+		return v('div', { classes: [ css.root, small ? css.small : null ] }, [
 			v('img', { key: 'cat-head', src: head, classes: css.head }),
 			v('img', { key: 'cat-body', src: body, classes: css.body }),
 			v('img', { key: 'cat-tail', src: tail, classes: css.tail })

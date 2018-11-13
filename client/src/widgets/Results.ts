@@ -1,9 +1,10 @@
-import { v } from '@dojo/framework/widget-core/d';
+import { v, w } from '@dojo/framework/widget-core/d';
 import { theme, ThemedMixin } from '@dojo/framework/widget-core/mixins/Themed';
 import { WidgetBase } from '@dojo/framework/widget-core/WidgetBase';
 
 import * as css from './styles/results.m.css';
-import * as headcss from './styles/heading.m.css';
+import { Cat } from './Cat';
+import { Dog } from './Dog';
 
 export interface ResultsProperties {
 	catCount: number;
@@ -16,13 +17,15 @@ export class Results extends ThemedMixin(WidgetBase)<ResultsProperties> {
 		const { catCount, dogCount } = this.properties;
 
 		return v('div', { classes: css.root }, [
-			v('div', { classes: [headcss.headingContainer, css.voteContainer] }, [
-				v('h1', { classes: [headcss.highlighted] }, ['Cats']),
-				v('p', [String(catCount)])
+			v('div', { classes: css.col }, [
+				v('h1', { classes: css.header }, ['Cats']),
+				v('p', { classes: css.total }, [`${catCount}`]),
+				w(Cat, { small: true })
 			]),
-			v('div', { classes: css.voteContainer }, [
-				v('h1', { classes: [headcss.highlighted] }, ['Dogs']),
-				v('p', [String(dogCount)])
+			v('div', { classes: css.col }, [
+				v('h1', { classes: css.header }, ['Dogs']),
+				v('p', { classes: css.total }, [`${dogCount}`]),
+				w(Dog, { small: true })
 			])
 		]);
 	}
