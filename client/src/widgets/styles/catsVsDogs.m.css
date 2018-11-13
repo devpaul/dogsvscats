@@ -1,13 +1,9 @@
-:root {
-	--primary-color: #2c48eb;
-	--active-color: #97a4f3;
-}
+@import './variables.css';
 
 .root {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	font-family: Helvetica, Arial, sans-serif;
 	font-weight: bold;
 	width: 100%;
 }

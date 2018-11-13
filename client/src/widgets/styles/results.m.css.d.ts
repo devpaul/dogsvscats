@@ -1,2 +1,4 @@
 export const root: string;
-export const voteContainer: string;
+export const header: string;
+export const col: string;
+export const total: string;

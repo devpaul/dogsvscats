@@ -5,6 +5,10 @@
 	transform: scale(0.8);
 }
 
+.root.small {
+	transform: scale(0.5);
+}
+
 .head {
 	position: absolute;
 	left: 10px;
