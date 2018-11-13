@@ -58,7 +58,7 @@ The server uses `ts-node` and does not require a build to start. Use `npm run st
 
 * Cat & Dog created by [Terdpongvector](https://www.freepik.com/terdpongvector)
 * [Meow sound](https://freesound.org/people/tuberatanka/sounds/110011/) created by Tuberatanka
-* [Bark sound](https://freesound.org/people/jorickhoofd/sounds/160092/) created by Jorickhoofd
+* [Bark sound](https://www.soundsnap.com/audio/mp3/248977/Large%20Dog%20Bark%203.mp3) by Soundsnap
 
 [Dojo]: https://dojo.io/
 [Dojo CLI]: https://github.com/dojo/cli
