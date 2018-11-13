@@ -6,7 +6,7 @@ import CatsVsDogs from './CatsVsDogs';
 import StoreProvider from '@dojo/framework/stores/StoreProvider';
 import Store from '@dojo/framework/stores/Store';
 import { setChoiceProcess, setExcitementProcess } from '../processes';
-import ResultsContainer from './ResultsContainer';
+import ResultsContainer from './Results.container';
 
 export default class App extends WidgetBase {
 	protected render() {
