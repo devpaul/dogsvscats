@@ -4,9 +4,9 @@ import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
 
 import CatsVsDogs from './CatsVsDogs';
 import StoreProvider from '@dojo/framework/stores/StoreProvider';
-import Store from '@dojo/framework/stores/Store';
-import { setChoiceProcess, setExcitementProcess } from '../processes';
-import ResultsContainer from './Results.container';
+import Store, { StatePaths } from '@dojo/framework/stores/Store';
+import { setChoiceProcess, setExcitementProcess, updateResultsProcess } from '../processes';
+import { Results } from './Results';
 
 export default class App extends WidgetBase {
 	protected render() {
@@ -14,25 +14,40 @@ export default class App extends WidgetBase {
 			w(Outlet, {
 				id: 'catsvsdogs',
 				key: 'catsvsdogs',
-				renderer: () => {
-					return w(StoreProvider, {
-						stateKey: 'state',
-						renderer: (state: Store) => {
-							const character = state.get(state.path('character'));
-							return w(CatsVsDogs, {
-								choice: character.choice,
-								excitement: character.excitement,
-								onChoiceChange: setChoiceProcess(state),
-								onExcitementChange: setExcitementProcess(state)
-							});
-						}
-					});
-				}
+				renderer: () => w(StoreProvider, {
+					stateKey: 'state',
+					renderer: (store: Store) => {
+						const character = store.get(store.path('character'));
+						return w(CatsVsDogs, {
+							choice: character.choice,
+							excitement: character.excitement,
+							onChoiceChange: setChoiceProcess(store),
+							onExcitementChange: setExcitementProcess(store)
+						});
+					}
+				})
 			}),
 			w(Outlet, {
 				id: 'results',
 				key: 'results',
-				renderer: () => w(ResultsContainer, {})
+				renderer: () => w(StoreProvider, {
+					stateKey: 'state',
+					paths: (path: StatePaths<any>) => [path('results')],
+					renderer: (store: Store) => {
+						const { get, path } = store;
+						const catCount = get(path('results', 'cat')) || 0;
+						const dogCount = get(path('results', 'dog')) || 0;
+
+						return w(Results, {
+							catCount,
+							dogCount,
+							fetchResults: () => {
+								updateResultsProcess(store)({})
+							}
+						})
+					}
+				})
+
 			})
 		]);
 	}
