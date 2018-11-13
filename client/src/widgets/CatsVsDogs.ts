@@ -65,25 +65,24 @@ export default class CatsVsDogs extends WidgetBase<CatsVsDogsProperties> {
 		const { excitement } = this.properties;
 		const soundName = choice === 'cat' ? 'Meow' : 'Woof';
 
-		return v('div', [
-			v('div', { classes: css.controls }, [
-				w(Slider, {
-					extraClasses: { root: css.slider, thumb: css.sliderThumb, track: css.sliderTrack, fill: css.sliderFill },
-					label: `How Excited is the ${choice}`,
-					value: excitement,
-					min: 0.2,
-					max: 5,
-					step: 0.2,
-					onInput: this._excitedChange
-				})
-			]),
-			choice === 'cat' ? w(Cat, { animationSpeed: excitement }) : w(Dog, { animationSpeed: excitement }),
-			v('div', { classes: css.buttonContainer }, [
-				v('button', {
-					classes: css.button,
-					onclick: this._onSpeakClick
-				}, [soundName, '  ', v('i', { classes: css.iconSound })])
-			])
+		return v('div', { classes: css.characterHolder }, [
+			w(Slider, {
+				extraClasses: { root: css.slider, thumb: css.sliderThumb, track: css.sliderTrack, fill: css.sliderFill },
+				label: `How Excited is the ${choice}`,
+				value: excitement,
+				min: 0.2,
+				max: 5,
+				step: 0.2,
+				onInput: this._excitedChange,
+				output: (value: number) => {
+					return `${Math.floor(value * 100)}%`;
+				}
+			}),
+			v('button', {
+				classes: css.button,
+				onclick: this._onSpeakClick
+			}, [soundName, '  ', v('i', { classes: css.iconSound })]),
+			choice === 'cat' ? w(Cat, { animationSpeed: excitement }) : w(Dog, { animationSpeed: excitement })
 		]);
 	}
 }

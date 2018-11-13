@@ -17,7 +17,7 @@ export class Dog extends ThemedMixin(WidgetBase)<DogProperties> {
 	private _getHeadAnimation(animationSpeed: number) {
 		return {
 			id: 'dog-head',
-			effects: [{ marginBottom: '0px' }, { marginBottom: '5px' }, { marginBottom: '0px' }] as any,
+			effects: [{ marginBottom: '0px' }, { marginBottom: '7px' }, { marginBottom: '0px' }] as any,
 			timing: {
 				duration: 800,
 				iterations: Infinity
