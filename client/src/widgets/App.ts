@@ -3,58 +3,52 @@ import { v, w } from '@dojo/framework/widget-core/d';
 import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
 
 import CatsVsDogs from './CatsVsDogs';
-import { Results } from './Results';
 import StoreProvider from '@dojo/framework/stores/StoreProvider';
-import Store from '@dojo/framework/stores/Store';
+import Store, { StatePaths } from '@dojo/framework/stores/Store';
 import { setChoiceProcess, setExcitementProcess, updateResultsProcess } from '../processes';
+import { Results } from './Results';
 
 export default class App extends WidgetBase {
-	lastResultsCheck: number = 0;
-
 	protected render() {
 		return v('div', [
 			w(Outlet, {
 				id: 'catsvsdogs',
 				key: 'catsvsdogs',
-				renderer: () => {
-					return w(StoreProvider, {
-						stateKey: 'state',
-						renderer: (state: Store) => {
-							const character = state.get(state.path('character'));
-							return w(CatsVsDogs, {
-								choice: character.choice,
-								excitement: character.excitement,
-								onChoiceChange: setChoiceProcess(state),
-								onExcitementChange: setExcitementProcess(state)
-							});
-						}
-					});
-				}
+				renderer: () => w(StoreProvider, {
+					stateKey: 'state',
+					renderer: (store: Store) => {
+						const character = store.get(store.path('character'));
+						return w(CatsVsDogs, {
+							choice: character.choice,
+							excitement: character.excitement,
+							onChoiceChange: setChoiceProcess(store),
+							onExcitementChange: setExcitementProcess(store)
+						});
+					}
+				})
 			}),
 			w(Outlet, {
 				id: 'results',
 				key: 'results',
-				renderer: () => {
-					return w(StoreProvider, {
-						stateKey: 'state',
-						renderer: (state: Store) => {
-							this.checkResults(state);
-							const results = state.get(state.path('results'));
-							return w(Results, {
-								catCount: results['cat'] || 0,
-								dogCount: results['dog'] || 0
-							});
-						}
-					});
-				}
+				renderer: () => w(StoreProvider, {
+					stateKey: 'state',
+					paths: (path: StatePaths<any>) => [path('results')],
+					renderer: (store: Store) => {
+						const { get, path } = store;
+						const catCount = get(path('results', 'cat')) || 0;
+						const dogCount = get(path('results', 'dog')) || 0;
+
+						return w(Results, {
+							catCount,
+							dogCount,
+							fetchResults: () => {
+								updateResultsProcess(store)({})
+							}
+						})
+					}
+				})
+
 			})
 		]);
-	}
-
-	private checkResults(state: Store) {
-		if (Date.now() - 3000 > this.lastResultsCheck) {
-			updateResultsProcess(state)({});
-			this.lastResultsCheck = Date.now();
-		}
 	}
 }
