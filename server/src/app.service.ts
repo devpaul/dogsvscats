@@ -16,6 +16,8 @@ export class AppService {
 
 	private records = new Map<string, Vote>();
 
+	private password: string | undefined;
+
 	vote(uuid: string, subject: string) {
 		if (!uuid || !subject) {
 			return false;
@@ -37,6 +39,26 @@ export class AppService {
 			data[subject] = count;
 		}
 		return data;
+	}
+
+	setPassword(password: string) {
+		if (!this.password) {
+			this.password = password;
+			return true;
+		}
+		return this.password === password;
+	}
+
+	reset(password: string) {
+		if (this.password && this.password === password) {
+			console.log('Resetting server');
+			console.log('Values before reset', this.get());
+			this.counts = new Map<string, number>();
+			this.records = new Map<string, Vote>();
+			return true;
+		}
+
+		return false;
 	}
 
 	private incrementCount(subject: string) {
