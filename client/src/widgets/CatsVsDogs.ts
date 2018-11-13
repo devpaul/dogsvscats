@@ -38,64 +38,52 @@ export default class CatsVsDogs extends WidgetBase<CatsVsDogsProperties> {
 		const { choice } = this.properties;
 
 		return v('div', { classes: css.root }, [
-			this.renderHeader(),
-			choice ? this.renderCharacter(choice!) : undefined
+			v('header', { classes: css.header }, [
+				v('button', {
+					classes: css.button,
+					onclick: () => {
+						this._onChoiceClick('cat');
+					}
+				}, ['Cats']),
+				v('button', {
+					classes: css.button,
+					onclick: () => {
+						this._onChoiceClick('dog');
+					}
+				}, ['Dogs'])
+			]),
+			this.renderCharacter(choice)
 		]);
 	}
 
-	private renderCharacter(choice: Animal) {
+	private renderCharacter(choice?: Animal) {
+
+		if (!choice) {
+			return undefined;
+		}
+
 		const { excitement } = this.properties;
 		const soundName = choice === 'cat' ? 'Meow' : 'Woof';
 
 		return v('div', [
 			v('div', { classes: css.controls }, [
 				w(Slider, {
-					extraClasses: { root: css.slider },
+					extraClasses: { root: css.slider, thumb: css.sliderThumb, track: css.sliderTrack, fill: css.sliderFill },
 					label: `How Excited is the ${choice}`,
 					value: excitement,
-					min: 0.1,
-					max: 3,
-					step: 0.1,
-					onChange: this._excitedChange
+					min: 0.2,
+					max: 5,
+					step: 0.2,
+					onInput: this._excitedChange
 				})
 			]),
 			choice === 'cat' ? w(Cat, { animationSpeed: excitement }) : w(Dog, { animationSpeed: excitement }),
 			v('div', { classes: css.buttonContainer }, [
-				v(
-					'button',
-					{
-						classes: css.button,
-						onclick: this._onSpeakClick
-					},
-					[soundName]
-				)
+				v('button', {
+					classes: css.button,
+					onclick: this._onSpeakClick
+				}, [soundName, '  ', v('i', { classes: css.iconSound })])
 			])
-		]);
-	}
-
-	private renderHeader() {
-		return v('header', { classes: css.header }, [
-			v(
-				'button',
-				{
-					classes: css.button,
-					onclick: () => {
-						this._onChoiceClick('cat');
-					}
-				},
-				['Cats']
-			),
-			v('p', {}, ['vs']),
-			v(
-				'button',
-				{
-					classes: css.button,
-					onclick: () => {
-						this._onChoiceClick('dog');
-					}
-				},
-				['Dogs']
-			)
 		]);
 	}
 }

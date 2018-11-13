@@ -1,12 +1,31 @@
+:root {
+	--primary-color: #2c48eb;
+	--active-color: #97a4f3;
+}
+
 .root {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
+	font-family: Helvetica, Arial, sans-serif;
+	font-weight: bold;
 }
 
 .button {
-	padding: 10px 20px;
-	margin: 5px 10px;
+	padding: 5px;
+	margin: 10px 20px;
+	border: 0;
+	border-bottom: 4px solid var(--primary-color);
+	background: transparent;
+	color: var(--primary-color);
+	font-weight: bold;
+	font-size: 24px;
+	transition: all 0.1s ease-in-out;
+}
+
+.button:hover {
+	border-color: var(--active-color);
+	color: var(--active-color);
 }
 
 .header {
@@ -26,7 +45,47 @@
 	width: 500px;
 }
 
+.sliderThumb {
+	border-radius: 50%;
+}
+
+.slider .sliderFill {
+	background: var(--active-color);
+}
+
+.sliderTrack {
+	border-radius: 4px;
+}
+
+.slider label {
+	padding: 15px 0;
+	display: block;
+}
+
 .buttonContainer {
 	display: flex;
 	justify-content: center;
+	margin-top: 20px;
+}
+
+@font-face {
+	font-family: 'icomoon';
+	src:  url('../assets/icomoon.woff?kbtvv7') format('woff');
+	font-weight: normal;
+	font-style: normal;
+  }
+
+.iconSound:before {
+	content: "\e900";
+	font-family: 'icomoon' !important;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
