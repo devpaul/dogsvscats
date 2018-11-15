@@ -1,5 +1,31 @@
 {
-	"build-app": {},
+	"build-app": {
+		"pwa": {
+			"manifest": {
+				"name": "Cats Vs Dogs",
+				"short_name": "CatsVsDogs",
+				"background_color": "#ffffff",
+				"theme_color": "#2c48eb",
+				"description": "App to decide if cats or dogs are better",
+				"icons": [
+					{ "src": "./src/img/icon512.png", "sizes": "512x512", "type": "image/png" },
+					{ "src": "./src/img/icon256.png", "sizes": "256x256", "type": "image/png" },
+					{ "src": "./src/img/icon128.png", "sizes": "128x128", "type": "image/png" }
+				]
+			},
+			"serviceWorker": {
+				"cache-prefix:": "catsVsDogs",
+				"routes": [
+					{
+						"urlPattern": ".*\\.(png|mp3)",
+						"strategy": "cacheFirst",
+						"cacheName": "catsVsDogs-media",
+						"expiration": { "maxAgeSeconds": 604800 }
+					}
+				]
+			}
+		}
+	},
 	"test-intern": {},
 	"create-app": {}
 }

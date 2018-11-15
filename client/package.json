@@ -20,7 +20,7 @@
     "typescript": "^3.1.4"
   },
   "scripts": {
-    "build": "dojo build app -m dev",
+    "build": "dojo build app -m dist",
     "pretty": "prettier --write \"src/**/*.md\" \"src/**/*.ts\" \"tests/**/*.ts\"",
     "watch": "dojo build app -s -m dev -w memory"
   },

@@ -59,7 +59,7 @@ export default class CatsVsDogs extends WidgetBase<CatsVsDogsProperties> {
 	private renderCharacter(choice?: Animal) {
 
 		if (!choice) {
-			return undefined;
+			return v('p', [ 'Choose your side above, cats or dogs?' ]);
 		}
 
 		const { excitement } = this.properties;
