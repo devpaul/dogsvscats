@@ -27,7 +27,7 @@ export class Results extends ThemedMixin(WidgetBase)<ResultsProperties> {
 	}
 
 	protected render() {
-		const { catCount, dogCount } = this.properties;
+		const { catCount = 0, dogCount = 0 } = this.properties;
 
 		return v('div', { classes: css.root }, [
 			v('div', { classes: css.col }, [
