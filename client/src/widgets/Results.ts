@@ -7,8 +7,8 @@ import { Cat } from './Cat';
 import { Dog } from './Dog';
 
 export interface ResultsProperties {
-	catCount: number;
-	dogCount: number;
+	catCount?: number;
+	dogCount?: number;
 	fetchResults: () => void;
 }
 
@@ -27,17 +27,17 @@ export class Results extends ThemedMixin(WidgetBase)<ResultsProperties> {
 	}
 
 	protected render() {
-		const { catCount = 0, dogCount = 0 } = this.properties;
+		const { catCount, dogCount } = this.properties;
 
 		return v('div', { classes: css.root }, [
 			v('div', { classes: css.col }, [
 				v('h1', { classes: css.header }, ['Cats']),
-				v('p', { classes: css.total }, [`${catCount}`]),
+				v('p', { classes: css.total }, [`${ catCount !== undefined ? catCount : ''}`]),
 				w(Cat, { small: true })
 			]),
 			v('div', { classes: css.col }, [
 				v('h1', { classes: css.header }, ['Dogs']),
-				v('p', { classes: css.total }, [`${dogCount}`]),
+				v('p', { classes: css.total }, [`${ dogCount !== undefined ? dogCount : ''}`]),
 				w(Dog, { small: true })
 			])
 		]);
