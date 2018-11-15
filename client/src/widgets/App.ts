@@ -35,8 +35,8 @@ export default class App extends WidgetBase {
 					paths: (path: StatePaths<any>) => [path('results')],
 					renderer: (store: Store) => {
 						const { get, path } = store;
-						const catCount = get(path('results', 'cat')) || 0;
-						const dogCount = get(path('results', 'dog')) || 0;
+						const catCount = get(path('results', 'cat'));
+						const dogCount = get(path('results', 'dog'));
 
 						return w(Results, {
 							catCount,
