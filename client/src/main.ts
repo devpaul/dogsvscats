@@ -31,4 +31,5 @@ initialStateProcess(store)({});
 registry.defineInjector('state', () => () => store);
 
 const r = renderer(() => w(App, {}));
-r.mount({ registry });
+const domNode = document.getElementById('app');
+domNode && r.mount( { domNode, registry });
