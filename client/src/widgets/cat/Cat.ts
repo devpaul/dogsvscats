@@ -1,12 +1,12 @@
 import { WidgetBase } from '@dojo/framework/widget-core/WidgetBase';
-import * as css from './styles/cat.m.css';
+import * as css from './cat.m.css';
 import { v } from '@dojo/framework/widget-core/d';
 import WebAnimation from '@dojo/framework/widget-core/meta/WebAnimation';
 import ThemedMixin from '@dojo/framework/widget-core/mixins/Themed';
 
-const head = require('./assets/cat-head.png');
-const body = require('./assets/cat-body.png');
-const tail = require('./assets/cat-tail.png');
+const head = require('./cat-head.png');
+const body = require('./cat-body.png');
+const tail = require('./cat-tail.png');
 
 export interface CatProperties {
 	animationSpeed?: number;

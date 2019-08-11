@@ -1,4 +1,4 @@
-@import './variables.css';
+@import '../../variables.css';
 
 .root {
 	display: flex;
@@ -59,13 +59,6 @@
 	padding: 15px 0;
 	display: block;
 }
-
-@font-face {
-	font-family: 'icomoon';
-	src:  url('../assets/icomoon.woff?kbtvv7') format('woff');
-	font-weight: normal;
-	font-style: normal;
-  }
 
 .iconSound:before {
 	content: "\e900";

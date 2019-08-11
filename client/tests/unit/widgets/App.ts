@@ -3,8 +3,8 @@ import harness from '@dojo/framework/testing/harness';
 import { v, w } from '@dojo/framework/widget-core/d';
 import Outlet from '@dojo/framework/routing/Outlet';
 
-import App from '../../../src/widgets/App';
-import * as css from '../../../src/widgets/styles/catsVsDogs.m.css';
+import App from '../../../src/screens/App';
+import * as css from '../../../src/screens/catsvsdogs/catsVsDogs.m.css';
 
 describe('App', () => {
 	it('default renders correctly', () => {
