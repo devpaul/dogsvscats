@@ -1,10 +1,10 @@
+import { v, w } from '@dojo/framework/core/vdom';
 import Outlet from '@dojo/framework/routing/Outlet';
-import { v, w } from '@dojo/framework/widget-core/d';
-import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
+import WidgetBase from '@dojo/framework/core/WidgetBase';
+import StoreProvider from '@dojo/framework/stores/StoreProvider'
+import Store, { StatePaths } from '@dojo/framework/stores/Store';
 
 import CatsVsDogs from './catsvsdogs/CatsVsDogs';
-import StoreProvider from '@dojo/framework/stores/StoreProvider';
-import Store, { StatePaths } from '@dojo/framework/stores/Store';
 import { setChoiceProcess, setExcitementProcess, updateResultsProcess } from '../processes';
 import { Results } from './results/Results';
 import { Route } from '../routes';

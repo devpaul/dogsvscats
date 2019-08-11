@@ -1,10 +1,9 @@
 import 'web-animations-js/web-animations-next-lite.min';
-import renderer from '@dojo/framework/widget-core/vdom';
-import { w } from '@dojo/framework/widget-core/d';
+import renderer, { w } from '@dojo/framework/core/vdom';
 import '@dojo/themes/dojo/index.css';
 
 import App from './screens/App';
-import Registry from '@dojo/framework/widget-core/Registry';
+import Registry from '@dojo/framework/core/Registry';
 import { registerRouterInjector } from '@dojo/framework/routing/RouterInjector';
 import Store from '@dojo/framework/stores/Store';
 import { State } from './interfaces';

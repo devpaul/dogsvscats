@@ -1,8 +1,8 @@
-import { ThemedMixin, theme } from '@dojo/framework/widget-core/mixins/Themed';
-import { WidgetBase } from '@dojo/framework/widget-core/WidgetBase';
+import { ThemedMixin, theme } from '@dojo/framework/core/mixins/Themed';
+import { WidgetBase } from '@dojo/framework/core/WidgetBase';
 import * as css from './dog.m.css';
-import { v } from '@dojo/framework/widget-core/d';
-import WebAnimation from '@dojo/framework/widget-core/meta/WebAnimation';
+import { v } from '@dojo/framework/core/vdom';
+import WebAnimation from '@dojo/framework/core/meta/WebAnimation';
 
 const head = require('./dog-head.png');
 const body = require('./dog-body.png');

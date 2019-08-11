@@ -1,6 +1,6 @@
-import { v, w } from '@dojo/framework/widget-core/d';
-import { theme, ThemedMixin } from '@dojo/framework/widget-core/mixins/Themed';
-import { WidgetBase } from '@dojo/framework/widget-core/WidgetBase';
+import { v, w } from '@dojo/framework/core/vdom';
+import { theme, ThemedMixin } from '@dojo/framework/core/mixins/Themed';
+import { WidgetBase } from '@dojo/framework/core/WidgetBase';
 
 import * as css from './results.m.css';
 import { Cat } from '../../widgets/cat/Cat';
