@@ -4,7 +4,7 @@ This project was generated with the [Dojo CLI] & [Dojo CLI create app command](h
 
 This app is a demo for a fun and not serious conference talk about JavaScript and tech debates and memes (e.g. tabs vs. spaces, classes vs. not), with the ultimate debate being whether we prefer cats or dogs.
 
-It will first be presented at the [November 2018 Phoenix TypeScript meetup](https://www.meetup.com/Phoenix-TypeScript/events/255940576/) and then at [HalfStack 2018](https://halfstackconf.com/). Slides and video links to be provided once they're available, as well as a link to the running application.
+It has been presented at [HalfStack 2018](https://halfstackconf.com/london/2018/) and the [November 2018 Phoenix TypeScript meetup](https://www.meetup.com/Phoenix-TypeScript/events/255940576/). Here are the [slides for the Phoenix TypeScript presentation](https://devpaul.github.io/catsvsdogs-slides/#/19).
 
 The Cats vs. Dogs app leverages modern [Dojo], Web Animation, WebAudio, and more for this simple demo app.
 
@@ -17,6 +17,7 @@ This repository contains both the client and server for cats vs dogs located in 
 * run `npm install` to install all dependencies
 * to build the client run `npm run build`
 * to start the server run `npm run start`
+* open http://localhost:3000
 
 ### Deploy
 
