@@ -6,6 +6,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-	<div id="app"></div>
+	<script type="text/javascript">
+		var link = document.querySelector('link[href*="bootstrap"]');
+		if (link) {
+			window.__public_origin__ = link.href.replace(/bootstrap.*/, '');
+		}
+	</script>
 </body>
 </html>

@@ -1,12 +1,12 @@
-declare type Animal = 'cat' | 'dog';
+declare type Character = 'cat' | 'dog' | 'spock' | 'yoda';
 
 export interface State {
 	character: {
-		choice: Animal | undefined;
+		choice: Character | undefined;
 		excitement: number;
 	};
 	results: {
-		[key: string]: number;
+		[K in Character]: number;
 	};
 	user: {
 		uuid: string;

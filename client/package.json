@@ -16,12 +16,15 @@
     "@types/web-animations-js": "2.2.6",
     "gh-pages": "^2.0.1",
     "prettier": "^1.14.3",
+    "rimraf": "^3.0.0",
     "typescript": "^3.1.4"
   },
   "scripts": {
     "build": "dojo build",
     "build:dev": "tsc && dojo build -m dev",
     "build:watch": "dojo build -m dev -w",
+    "build:spock": "dojo build app -f \"spock-vs-yoda\"",
+    "clean": "rimraf output",
     "pretty": "prettier --write \"src/**/*.md\" \"src/**/*.ts\" \"tests/**/*.ts\"",
     "test": "dojo test -u -n",
     "watch": "dojo build app -s -m dev -w memory"
