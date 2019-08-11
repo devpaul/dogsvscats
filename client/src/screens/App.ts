@@ -2,18 +2,19 @@ import Outlet from '@dojo/framework/routing/Outlet';
 import { v, w } from '@dojo/framework/widget-core/d';
 import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
 
-import CatsVsDogs from './CatsVsDogs';
+import CatsVsDogs from './catsvsdogs/CatsVsDogs';
 import StoreProvider from '@dojo/framework/stores/StoreProvider';
 import Store, { StatePaths } from '@dojo/framework/stores/Store';
 import { setChoiceProcess, setExcitementProcess, updateResultsProcess } from '../processes';
-import { Results } from './Results';
+import { Results } from './results/Results';
+import { Route } from '../routes';
 
 export default class App extends WidgetBase {
 	protected render() {
 		return v('div', [
 			w(Outlet, {
 				id: 'catsvsdogs',
-				key: 'catsvsdogs',
+				key: Route.Main,
 				renderer: () => w(StoreProvider, {
 					stateKey: 'state',
 					renderer: (store: Store) => {
@@ -29,7 +30,7 @@ export default class App extends WidgetBase {
 			}),
 			w(Outlet, {
 				id: 'results',
-				key: 'results',
+				key: Route.Results,
 				renderer: () => w(StoreProvider, {
 					stateKey: 'state',
 					paths: (path: StatePaths<any>) => [path('results')],

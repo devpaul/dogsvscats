@@ -1,13 +1,13 @@
 import { v, w } from '@dojo/framework/widget-core/d';
 import WidgetBase from '@dojo/framework/widget-core/WidgetBase';
 
-import { Cat } from './Cat';
-import { Dog } from './Dog';
-import * as css from './styles/catsVsDogs.m.css';
-import { CoreAudio } from './CoreAudio';
+import { Cat } from '../../widgets/cat/Cat';
+import { Dog } from '../../widgets/dog/Dog';
+import * as css from './catsVsDogs.m.css';
+import { CoreAudio } from '../../CoreAudio';
 import Slider from '@dojo/widgets/slider';
-import { Animal } from '../interfaces';
-import { SetChoiceOpts, SetExcitementOpts } from '../processes';
+import { Animal } from '../../interfaces';
+import { SetChoiceOpts, SetExcitementOpts } from '../../processes';
 
 export interface CatsVsDogsProperties {
 	choice: undefined | Animal;

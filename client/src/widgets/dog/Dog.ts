@@ -1,12 +1,12 @@
 import { ThemedMixin, theme } from '@dojo/framework/widget-core/mixins/Themed';
 import { WidgetBase } from '@dojo/framework/widget-core/WidgetBase';
-import * as css from './styles/dog.m.css';
+import * as css from './dog.m.css';
 import { v } from '@dojo/framework/widget-core/d';
 import WebAnimation from '@dojo/framework/widget-core/meta/WebAnimation';
 
-const head = require('./assets/dog-head.png');
-const body = require('./assets/dog-body.png');
-const tail = require('./assets/dog-tail.png');
+const head = require('./dog-head.png');
+const body = require('./dog-body.png');
+const tail = require('./dog-tail.png');
 
 export interface DogProperties {
 	animationSpeed?: number;
