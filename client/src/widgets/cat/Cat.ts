@@ -1,8 +1,8 @@
-import { WidgetBase } from '@dojo/framework/widget-core/WidgetBase';
+import { WidgetBase } from '@dojo/framework/core/WidgetBase';
 import * as css from './cat.m.css';
-import { v } from '@dojo/framework/widget-core/d';
-import WebAnimation from '@dojo/framework/widget-core/meta/WebAnimation';
-import ThemedMixin from '@dojo/framework/widget-core/mixins/Themed';
+import { v } from '@dojo/framework/core/vdom';
+import WebAnimation from '@dojo/framework/core/meta/WebAnimation';
+import ThemedMixin from '@dojo/framework/core/mixins/Themed';
 
 const head = require('./cat-head.png');
 const body = require('./cat-body.png');
