@@ -2,17 +2,16 @@
   "name": "catsvsdogs",
   "version": "1.0.0",
   "dependencies": {
-    "@dojo/framework": "^6.0.0-alpha.16",
+    "@dojo/framework": "6.0.0-alpha.16",
     "@dojo/themes": "^5.0.1",
-    "@dojo/widgets": "^6.0.0-alpha.4",
+    "@dojo/widgets": "6.0.0-alpha.4",
     "tslib": "~1.10.0",
     "web-animations-js": "2.3.2"
   },
   "devDependencies": {
-    "@dojo/cli": "^6.0.0-alpha.1",
-    "@dojo/cli-build-app": "^6.0.0-alpha.8",
-    "@dojo/cli-create-widget": "^5.0.0",
-    "@dojo/cli-test-intern": "^6.0.0-alpha.1",
+    "@dojo/cli": "6.0.0-alpha.1",
+    "@dojo/cli-build-app": "6.0.0-alpha.8",
+    "@dojo/cli-test-intern": "6.0.0-alpha.1",
     "@types/node": "~9.6.5",
     "@types/web-animations-js": "2.2.6",
     "gh-pages": "^2.0.1",
@@ -23,8 +22,8 @@
     "build": "dojo build",
     "build:dev": "tsc && dojo build -m dev",
     "build:watch": "dojo build -m dev -w",
-    "build:old": "dojo build app -m dist",
     "pretty": "prettier --write \"src/**/*.md\" \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "test": "dojo test -u -n",
     "watch": "dojo build app -s -m dev -w memory"
   },
   "prettier": {
