@@ -2,6 +2,7 @@ import { State } from './interfaces';
 import { createCommandFactory, createProcess } from '@dojo/framework/stores/process';
 import { add, replace } from '@dojo/framework/stores/state/operations';
 import { uuid } from '@dojo/framework/core/util';
+import { entries } from '@dojo/framework/shim/object';
 
 export interface SetChoiceOpts {
 	choice: State['character']['choice'];
@@ -38,10 +39,9 @@ const fetchResults = commandFactory(async ({ get, path }) => {
 	const results: unknown = await response.json();
 
 	if (response.ok && isResults(results)) {
-		return Object.keys(results).reduce((actions: any[], key) => {
-			const value = results[key];
-			if (value !== get(path('results', key))) {
-				actions.push(replace(path('results', key), value));
+		return entries(results).reduce((actions: any[], [ character, count ]) => {
+			if (count !== get(path('results', character))) {
+				actions.push(replace(path('results', character), count));
 			}
 			return actions;
 		}, []);

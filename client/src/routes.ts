@@ -1,11 +1,11 @@
 export const enum Route {
-	Main = 'catsvsdogs',
+	Main = 'select',
 	Results = 'results'
 }
 
 export const routes = [
 	{
-		path: 'catsvsdogs',
+		path: 'select',
 		outlet: Route.Main,
 		defaultRoute: true
 	},
