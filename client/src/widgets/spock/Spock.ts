@@ -15,7 +15,7 @@ export interface SpockProperties {
 export class Spock extends ThemedMixin(WidgetBase)<SpockProperties> {
 	private _getHeadAnimation(animationSpeed: number) {
 		return {
-			id: 'cat-head',
+			id: 'character-head',
 			effects: [
 				{ marginBottom: '0px', transform: 'rotate(0deg)' },
 				{ marginBottom: '7px', transform: 'rotate(-10deg)' },
@@ -32,34 +32,14 @@ export class Spock extends ThemedMixin(WidgetBase)<SpockProperties> {
 		};
 	}
 
-	private _getTailAnimation(animationSpeed: number) {
-		return {
-			id: 'cat-tail',
-			effects: [
-				{ transform: 'rotate(0deg)' },
-				{ transform: 'rotate(-10deg)' },
-				{ transform: 'rotate(0deg)' }
-			],
-			timing: {
-				duration: 1000,
-				iterations: Infinity
-			},
-			controls: {
-				play: true,
-				playbackRate: animationSpeed
-			}
-		};
-	}
-
 	protected render() {
 		const { animationSpeed = 1, small } = this.properties;
 
-		this.meta(WebAnimation).animate('cat-head', this._getHeadAnimation(animationSpeed));
-		this.meta(WebAnimation).animate('cat-tail', this._getTailAnimation(animationSpeed));
+		this.meta(WebAnimation).animate('character-head', this._getHeadAnimation(animationSpeed));
 
 		return v('div', { classes: [ css.root, small ? css.small : null ] }, [
-			v('img', { key: 'cat-head', src: head, classes: css.head }),
-			v('img', { key: 'cat-body', src: body, classes: css.body }),
+			v('img', { key: 'character-head', src: head, classes: css.head }),
+			v('img', { key: 'character-body', src: body, classes: css.body }),
 		]);
 	}
 }

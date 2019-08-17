@@ -11,7 +11,7 @@
 
 .head {
 	position: absolute;
-	left: 95px;
+	left: 88px;
 	bottom: 160px;
 	z-index: 3;
 }
@@ -19,6 +19,6 @@
 .body {
 	position: absolute;
 	bottom: 0px;
-	left: 40px;
+	left: 165px;
 	z-index: 2;
 }
