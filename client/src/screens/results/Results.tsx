@@ -6,6 +6,7 @@ import { WidgetBase } from '@dojo/framework/core/WidgetBase';
 import * as css from './results.m.css';
 import { Cat } from '../../widgets/cat/Cat';
 import { Dog } from '../../widgets/dog/Dog';
+import { Spock } from '../../widgets/spock/Spock';
 import { State, Character } from '../../interfaces';
 import Store, { StatePaths } from '@dojo/framework/stores/Store';
 import has from '@dojo/framework/core/has';
@@ -24,7 +25,7 @@ export class Results extends I18nMixin(ThemedMixin(WidgetBase)) {
 					clearInterval(interval);
 				}
 				else {
-					interval.unref();
+					(interval as any).unref();
 				}
 			}
 		});
@@ -67,6 +68,9 @@ export class Results extends I18nMixin(ThemedMixin(WidgetBase)) {
 
 	private renderCharacter(character: Character) {
 		if (has('spock-vs-yoda')) {
+			if (character === 'spock') {
+				return <Spock small={true} />
+			}
 		}
 		else {
 			if (character === 'cat') {
