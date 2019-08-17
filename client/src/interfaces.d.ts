@@ -1,4 +1,4 @@
-declare type Character = 'cat' | 'dog' | 'spock' | 'yoda';
+export type Character = 'cat' | 'dog' | 'spock' | 'yoda';
 
 export interface State {
 	character: {

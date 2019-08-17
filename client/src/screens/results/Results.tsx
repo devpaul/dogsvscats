@@ -9,7 +9,6 @@ import { Dog } from '../../widgets/dog/Dog';
 import { State, Character } from '../../interfaces';
 import Store, { StatePaths } from '@dojo/framework/stores/Store';
 import has from '@dojo/framework/core/has';
-import { Spock } from '../../widgets/spock/Spock';
 import StoreProvider from '@dojo/framework/stores/StoreProvider';
 import { entries } from '@dojo/framework/shim/object'
 import bundle from './results.nls';
@@ -68,9 +67,6 @@ export class Results extends I18nMixin(ThemedMixin(WidgetBase)) {
 
 	private renderCharacter(character: Character) {
 		if (has('spock-vs-yoda')) {
-			if (character === 'spock') {
-				return <Spock small={true} />
-			}
 		}
 		else {
 			if (character === 'cat') {

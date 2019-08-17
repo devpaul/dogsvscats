@@ -19,4 +19,3 @@ initialStateProcess(store)({});
 
 const r = renderer(() => <App />);
 r.mount({ registry });
-r.invalidate();
