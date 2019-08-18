@@ -8,6 +8,10 @@
 	width: 100%;
 }
 
+.logo {
+	height: 1rem;
+}
+
 .characterHolder {
 	width: 100%;
 	display: flex;

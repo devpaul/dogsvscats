@@ -1,4 +1,5 @@
 export const root: string;
+export const logo: string;
 export const characterHolder: string;
 export const button: string;
 export const header: string;

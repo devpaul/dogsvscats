@@ -10,6 +10,9 @@ import { Yoda } from '../../widgets/yoda/Yoda';
 import * as css from './spockVsYoda.m.css';
 import { setChoiceProcess } from '../../processes';
 
+const starfleet = require('./starfleet.svg');
+const rebel = require('./rebel.svg');
+
 export default class SpockVsYoda extends WidgetBase {
 	private coreAudio = new CoreAudio();
 
@@ -50,13 +53,22 @@ export default class SpockVsYoda extends WidgetBase {
 			return (<p>Choose your side: Starfleet or Rebels?</p>);
 		}
 
-		const soundName = choice === 'spock' ? 'Starfleet' : 'Rebels';
+		const onClick = () => { this._onSpeakClick(choice, excitement) }
 
 		return (
 			<div>
-				<button classes={css.button} onclick={() => { this._onSpeakClick(choice, excitement) }}>{`${soundName} `}<i classes={css.iconSound}></i></button>
-				{ choice === 'spock' && <Spock animationSpeed={excitement} />}
-				{ choice === 'yoda' && <Yoda animationSpeed={excitement} />}
+				{ choice === 'spock' && <virtual>
+					<button classes={css.button} onclick={onClick}>
+						<img class={css.logo} src={starfleet} /> Join Starfleet <i classes={css.iconSound}></i>
+					</button>
+					<Spock animationSpeed={excitement} />
+				</virtual>}
+				{ choice === 'yoda' && <virtual>
+					<button classes={css.button} onclick={onClick}>
+						<img class={css.logo} src={rebel} /> Join the Rebels <i classes={css.iconSound}></i>
+					</button>
+					<Yoda animationSpeed={excitement} />
+				</virtual>}
 			</div>
 		);
 	}
