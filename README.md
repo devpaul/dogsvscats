@@ -60,6 +60,11 @@ The server uses `ts-node` and does not require a build to start. Use `npm run st
 * Cat & Dog created by [Terdpongvector](https://www.freepik.com/terdpongvector)
 * [Meow sound](https://freesound.org/people/tuberatanka/sounds/110011/) created by Tuberatanka
 * [Bark sound](https://www.soundsnap.com/audio/mp3/248977/Large%20Dog%20Bark%203.mp3) by Soundsnap
+* [Yoda Image source](https://bankkita.com/images/yoda-clipart-small-3.jpg)
+* [Spock image](https://www.deviantart.com/zombiedaisuke/art/StarTrek-Chibi-KS-145877655) by [Zombie Daisuke](https://www.deviantart.com/zombiedaisuke)
+* [Yoda Audio](http://www.realmofdarkness.net/sb/sw-yoda/) from Realm of Darkness soundboard
+* [Starfleet logo](https://upload.wikimedia.org/wikipedia/commons/6/66/USS_Enterprise_Patch.svg) Wikipedia
+* [Rebel logo](https://upload.wikimedia.org/wikipedia/commons/2/2a/Rebel_Alliance_logo.svg) Wikipedia
 
 [Dojo]: https://dojo.io/
 [Dojo CLI]: https://github.com/dojo/cli
