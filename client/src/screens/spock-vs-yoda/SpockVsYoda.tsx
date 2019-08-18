@@ -6,6 +6,7 @@ import StoreProvider from '@dojo/framework/stores/StoreProvider';
 import { CoreAudio } from '../../CoreAudio';
 import { Character, State } from '../../interfaces';
 import { Spock } from '../../widgets/spock/Spock';
+import { Yoda } from '../../widgets/yoda/Yoda';
 import * as css from './spockVsYoda.m.css';
 import { setChoiceProcess } from '../../processes';
 
@@ -55,6 +56,7 @@ export default class SpockVsYoda extends WidgetBase {
 			<div>
 				<button classes={css.button} onclick={() => { this._onSpeakClick(choice, excitement) }}>{`${soundName} `}<i classes={css.iconSound}></i></button>
 				{ choice === 'spock' && <Spock animationSpeed={excitement} />}
+				{ choice === 'yoda' && <Yoda animationSpeed={excitement} />}
 			</div>
 		);
 	}
