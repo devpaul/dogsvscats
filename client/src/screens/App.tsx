@@ -9,6 +9,10 @@ import CatsVsDogs from './cats-vs-dogs/CatsVsDogs';
 import SpockVsYoda from './spock-vs-yoda/SpockVsYoda';
 
 export default class App extends WidgetBase {
+	protected onAttach() {
+		document.title = has('spock-vs-yoda') ? 'Spock vs Yoda' : 'Cats vs Dogs';
+	}
+
 	protected render() {
 		return (
 			<div>
