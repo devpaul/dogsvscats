@@ -15,7 +15,7 @@ importScripts("workbox-v3.6.3/workbox-sw.js");
 workbox.setConfig({modulePathPrefix: "workbox-v3.6.3"});
 
 importScripts(
-  "precache-manifest.0ffb7a3071c2668de7a27bfe6bac77a3.js"
+  "precache-manifest.f39f7252d2745bc1477464afd7085ff2.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "catsvsdogs"});

@@ -1,1 +1,0 @@
-window.__bundleList = ["main.bb7c2cbccd767ee858ca.bundle.js","runtime.d41d8cd98f00b204e980.bundle.js"]
