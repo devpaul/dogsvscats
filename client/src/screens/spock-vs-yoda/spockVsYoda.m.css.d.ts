@@ -1,6 +1,7 @@
 export const root: string;
 export const logo: string;
 export const characterHolder: string;
+export const underline: string;
 export const button: string;
 export const header: string;
 export const slider: string;

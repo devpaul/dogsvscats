@@ -20,7 +20,7 @@
 	justify-content: center;
 }
 
-.button {
+.underline {
 	padding: 5px;
 	margin: 10px 20px;
 	border: 0;
@@ -32,9 +32,13 @@
 	transition: all 0.1s ease-in-out;
 }
 
-.button:hover {
+.underline:hover {
 	border-color: var(--active-color);
 	color: var(--active-color);
+}
+
+.button {
+	padding: 5px;
 }
 
 .header {

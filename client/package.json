@@ -23,6 +23,7 @@
     "build": "dojo build",
     "build:dev": "tsc && dojo build -m dev",
     "build:watch": "dojo build -m dev -w",
+    "build:cats": "dojo build app",
     "build:spock": "dojo build app -f \"spock-vs-yoda\"",
     "clean": "rimraf output",
     "pretty": "prettier --write \"src/**/*.md\" \"src/**/*.ts\" \"tests/**/*.ts\"",

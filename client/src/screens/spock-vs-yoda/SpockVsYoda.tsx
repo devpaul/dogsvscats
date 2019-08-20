@@ -42,8 +42,8 @@ export default class SpockVsYoda extends WidgetBase {
 
 		return (
 			<header classes={css.header}>
-				<button classes={css.button} onclick={() => { onChoiceClick({ choice: 'spock' }) }}>Starfleet</button>
-				<button classes={css.button} onclick={() => { onChoiceClick({ choice: 'yoda' }) }}>Rebels</button>
+				<button classes={css.underline} onclick={() => { onChoiceClick({ choice: 'spock' }) }}>Starfleet</button>
+				<button classes={css.underline} onclick={() => { onChoiceClick({ choice: 'yoda' }) }}>Rebels</button>
 			</header>
 		);
 	}
@@ -56,18 +56,18 @@ export default class SpockVsYoda extends WidgetBase {
 		const onClick = () => { this._onSpeakClick(choice, excitement) }
 
 		return (
-			<div>
+			<div classes={css.characterHolder}>
 				{ choice === 'spock' && <virtual>
+					<Spock animationSpeed={excitement} />
 					<button classes={css.button} onclick={onClick}>
 						<img class={css.logo} src={starfleet} /> Join Starfleet <i classes={css.iconSound}></i>
 					</button>
-					<Spock animationSpeed={excitement} />
 				</virtual>}
 				{ choice === 'yoda' && <virtual>
+					<Yoda animationSpeed={excitement} />
 					<button classes={css.button} onclick={onClick}>
 						<img class={css.logo} src={rebel} /> Join the Rebels <i classes={css.iconSound}></i>
 					</button>
-					<Yoda animationSpeed={excitement} />
 				</virtual>}
 			</div>
 		);
