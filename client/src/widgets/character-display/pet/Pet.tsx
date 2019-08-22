@@ -7,7 +7,7 @@ import * as css from './pet.m.css';
 
 export class Pet extends WidgetBase<CharacterDisplayProperties> {
 	protected render() {
-		const { excitement, choiceName, sounds: [ sound ], onExcitementChange, onSoundClick } = this.properties;
+		const { excitement, choiceName, sounds: [ sound ], onExcitementChange } = this.properties;
 		const sliderLabel = `How Excited is the ${choiceName}`;
 
 		return (
@@ -24,9 +24,15 @@ export class Pet extends WidgetBase<CharacterDisplayProperties> {
 						return `${Math.floor(value * 100)}%`;
 					}}
 				/>
-				<button classes={css.button} onclick={() => { onSoundClick(sound.url, excitement) }}>{`${sound.name} `}<i classes={css.iconSound}></i></button>
+				{ sound && <button classes={css.button} onclick={() => { this._onPlaySound() }}>{`${sound.name} `}<i classes={css.iconSound}></i></button> }
 				{ this.children }
 			</div>
 		);
+	}
+
+	private _onPlaySound() {
+		const { onPlaySound, excitement, sounds: [ sound ] } = this.properties;
+
+		sound && onPlaySound && onPlaySound(sound.url, excitement);
 	}
 }

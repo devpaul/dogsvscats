@@ -11,7 +11,7 @@ export interface CharacterProperties {
 	character: string;
 	excitement?: number;
 	small?: boolean;
-	onCharacterClick?(): void;
+	onPlaySound?(sound: string, rate: number): void;
 }
 
 export class Character extends ThemedMixin(WidgetBase)<CharacterProperties> {

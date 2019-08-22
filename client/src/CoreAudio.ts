@@ -39,7 +39,7 @@ export class CoreAudio {
 	}
 
 	private async loadAudio(sound: string) {
-		const result = await fetch(`assets/sounds/${sound}.mp3`);
+		const result = await fetch(`assets/${sound}`);
 		const audioData = await result.arrayBuffer();
 		if (this.context.decodeAudioData.length === 1) {
 			return await this.context.decodeAudioData(audioData);

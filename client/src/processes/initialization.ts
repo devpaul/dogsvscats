@@ -27,10 +27,10 @@ export const initialStateCommand = commandFactory(({ path }) => {
 					choiceName: 'Starfleet',
 					logo: 'assets/spock/starfleet.svg',
 					sound: [
-						{ name: '', url: 'assets/spock/spock.mp3'},
-						{ name: '', url: 'assets/spock/affirmative.mp3'},
-						{ name: '', url: 'assets/spock/facinating.mp3'},
-						{ name: '', url: 'assets/spock/final.mp3'}
+						{ name: '', url: 'spock/spock.mp3'},
+						{ name: '', url: 'spock/affirmative.mp3'},
+						{ name: '', url: 'spock/facinating.mp3'},
+						{ name: '', url: 'spock/final.mp3'}
 					],
 					type: 'faction'
 				},
@@ -39,10 +39,10 @@ export const initialStateCommand = commandFactory(({ path }) => {
 					choiceName: 'Rebels',
 					logo: 'assets/yoda/rebel.svg',
 					sound: [
-						{ name: '', url: 'assets/yoda/yoda.mp3'},
-						{ name: '', url: 'assets/yoda/haha.mp3'},
-						{ name: '', url: 'assets/yoda/mmm.mp3'},
-						{ name: '', url: 'assets/yoda/oohh.mp3'},
+						{ name: '', url: 'yoda/yoda.mp3'},
+						{ name: '', url: 'yoda/haha.mp3'},
+						{ name: '', url: 'yoda/mmm.mp3'},
+						{ name: '', url: 'yoda/oohh.mp3'},
 					],
 					type: 'faction'
 				}
@@ -50,13 +50,13 @@ export const initialStateCommand = commandFactory(({ path }) => {
 				{
 					character: 'cat',
 					choiceName: 'Cats',
-					sound: [ { name: 'Meow', url: 'cat/meow.mp3'} ],
+					sound: [ { name: 'Meow', url: 'cat/cat.mp3'} ],
 					type: 'pet'
 				},
 				{
 					character: 'dog',
 					choiceName: 'Dogs',
-					sound: [ { name: 'Woof', url: 'dog/woof.mp3'} ],
+					sound: [ { name: 'Woof', url: 'dog/dog.mp3'} ],
 					type: 'pet'
 				}
 			],

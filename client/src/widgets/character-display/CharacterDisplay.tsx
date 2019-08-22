@@ -13,7 +13,7 @@ export interface CharacterDisplayProperties {
 	logo?: string;
 	sounds: SoundConfig[];
 	onExcitementChange(value: number): void;
-	onSoundClick(sound: string, excitement: number): void;
+	onPlaySound?(sound: string, excitement: number): void;
 }
 
 export class CharacterDisplay extends ThemedMixin(WidgetBase)<CharacterDisplayProperties> {

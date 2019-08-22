@@ -5,20 +5,27 @@ import Store from '@dojo/framework/stores/Store';
 import StoreProvider from '@dojo/framework/stores/StoreProvider';
 
 import { State, CharacterConfig } from '../../interfaces';
-import { setChoiceProcess } from '../../processes';
+import { setChoiceProcess, setExcitementProcess } from '../../processes';
 import * as css from './select.m.css';
 import { CharacterDisplay } from '../../widgets/character-display/CharacterDisplay';
 import { Character } from '../../widgets/character/Character';
+import { CoreAudio } from '../../CoreAudio';
 
 function setDocumentTitle(title: string) {
 	document.title = title;
 }
 
 export class Select extends I18nMixin(WidgetBase) {
+	private audio = new CoreAudio();
+
 	protected render() {
 		return (
 			<StoreProvider stateKey="state" renderer={(store: Store<State>) => this._renderSelect(store)} />
 		);
+	}
+
+	private _onPlaySound(sound: string, rate: number) {
+		this.audio.play(sound, rate);
 	}
 
 	private _renderSelect(store: Store<State>) {
@@ -37,15 +44,13 @@ export class Select extends I18nMixin(WidgetBase) {
 						<button classes={css.button} onclick={() => { onChoiceClick({ choice: choice.character }) }}>{choice.choiceName}</button>
 					))}
 				</header>
-				{ character ? this._renderCharacter(character, excitement) : this._renderPrompt(config.prompt) }
+				{ character ? this._renderCharacter(store, character, excitement) : this._renderPrompt(config.prompt) }
 			</div>
 		);
 	}
 
-	private _renderCharacter(choice: CharacterConfig, excitement: number) {
-		const onExcitementChange = () => {}; // TODO
-		const onSoundClick = () => {}; // TODO
-		const onCharacterClick = undefined; // TODO
+	private _renderCharacter(store: Store<State>, choice: CharacterConfig, excitement: number) {
+		const playSound = (sound: string, rate: number) => this._onPlaySound(sound, rate);
 
 		return <CharacterDisplay
 			type={choice.type}
@@ -53,13 +58,13 @@ export class Select extends I18nMixin(WidgetBase) {
 			excitement={excitement}
 			logo={choice.logo}
 			sounds={choice.sound}
-			onExcitementChange={onExcitementChange}
-			onSoundClick={onSoundClick}
+			onExcitementChange={excitement => setExcitementProcess(store)({ excitement })}
+			onPlaySound={(sound, rate) => playSound(sound, rate)}
 		>
 			<Character
 				character={choice.character}
 				excitement={excitement}
-				onCharacterClick={onCharacterClick}
+				onPlaySound={(sound, rate) => playSound(sound, rate)}
 			/>
 		</CharacterDisplay>
 	}
