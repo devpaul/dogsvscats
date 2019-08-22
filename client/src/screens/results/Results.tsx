@@ -8,6 +8,7 @@ import StoreProvider from '@dojo/framework/stores/StoreProvider';
 import { Character as CharacterType, State } from '../../interfaces';
 import { updateResultsProcess } from '../../processes';
 import { Character } from '../../widgets/character/Character';
+import { createInterval } from '../../util/timer';
 import * as css from './results.m.css';
 import bundle from './results.nls';
 
@@ -17,17 +18,7 @@ export class Results extends I18nMixin(ThemedMixin(WidgetBase)) {
 
 	protected onAttach() {
 		this.updateResults();
-		const interval = setInterval(() => this.updateResults(), 3000);
-		this.own({
-			destroy() {
-				if (typeof interval === 'number') {
-					clearInterval(interval);
-				}
-				else {
-					(interval as any).unref();
-				}
-			}
-		});
+		this.own(createInterval(() => this.updateResults, 3000));
 	}
 
 	private updateResults() {

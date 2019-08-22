@@ -1,3 +1,14 @@
+.root {
+	position: relative;
+	width: 450px;
+	height: 520px;
+	transform: scale(0.8);
+}
+
+.root.small {
+	transform: scale(0.5);
+}
+
 .head {
 	position: absolute;
 	left: 88px;

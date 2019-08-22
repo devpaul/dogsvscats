@@ -29,8 +29,7 @@ export const initialStateCommand = commandFactory(({ path }) => {
 					sound: [
 						{ name: '', url: 'spock/spock.mp3'},
 						{ name: '', url: 'spock/affirmative.mp3'},
-						{ name: '', url: 'spock/facinating.mp3'},
-						{ name: '', url: 'spock/final.mp3'}
+						{ name: '', url: 'spock/facinating.mp3'}
 					],
 					type: 'faction'
 				},

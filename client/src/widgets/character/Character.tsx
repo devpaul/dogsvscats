@@ -6,11 +6,14 @@ import { Cat } from './cat/Cat';
 import { Dog } from './dog/Dog';
 import { Spock } from './spock/Spock';
 import { Yoda } from './yoda/Yoda';
+import { SoundConfig } from '../../interfaces';
 
 export interface CharacterProperties {
 	character: string;
 	excitement?: number;
 	small?: boolean;
+	sounds?: SoundConfig[];
+	onExcitementChange?(value: number): void;
 	onPlaySound?(sound: string, rate: number): void;
 }
 

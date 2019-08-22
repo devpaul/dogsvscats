@@ -51,6 +51,7 @@ export class Select extends I18nMixin(WidgetBase) {
 
 	private _renderCharacter(store: Store<State>, choice: CharacterConfig, excitement: number) {
 		const playSound = (sound: string, rate: number) => this._onPlaySound(sound, rate);
+		const onExcitementChange = (excitement: number) => setExcitementProcess(store)({ excitement })
 
 		return <CharacterDisplay
 			type={choice.type}
@@ -58,13 +59,15 @@ export class Select extends I18nMixin(WidgetBase) {
 			excitement={excitement}
 			logo={choice.logo}
 			sounds={choice.sound}
-			onExcitementChange={excitement => setExcitementProcess(store)({ excitement })}
-			onPlaySound={(sound, rate) => playSound(sound, rate)}
+			onExcitementChange={onExcitementChange}
+			onPlaySound={playSound}
 		>
 			<Character
 				character={choice.character}
 				excitement={excitement}
-				onPlaySound={(sound, rate) => playSound(sound, rate)}
+				sounds={choice.sound}
+				onPlaySound={playSound}
+				onExcitementChange={onExcitementChange}
 			/>
 		</CharacterDisplay>
 	}
