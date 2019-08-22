@@ -7,7 +7,7 @@ import Store from '@dojo/framework/stores/Store';
 import { registerStoreInjector } from '@dojo/framework/stores/StoreInjector';
 
 import { State } from './interfaces';
-import { initialStateProcess } from './processes';
+import { initialStateProcess } from './processes/initialization';
 import { routes } from './routes';
 import App from './screens/App';
 

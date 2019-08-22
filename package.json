@@ -8,7 +8,7 @@
     "prettier": "^1.14.3"
   },
   "scripts": {
-    "build": "cd client && npm run build",
+    "build": "cd client && npm run build:spock",
     "deploy:gh": "npm run build && node ./support/publish",
     "deploy:now": "now --public",
     "install": "cd client && npm install && cd ../server && npm install",
