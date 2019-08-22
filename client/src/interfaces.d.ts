@@ -1,4 +1,5 @@
 export interface State {
+	request: Requests;
 	character: CharacterDetails;
 	config: Config;
 	results: Results;
@@ -8,6 +9,16 @@ export interface State {
 export type Character = 'cat' | 'dog' | 'spock' | 'yoda';
 
 export type CharacterDisplay = 'pet' | 'faction';
+
+export interface Requests {
+	[key: string]: RequestDetails;
+}
+
+export interface RequestDetails {
+	isLoading: boolean | undefined;
+	message?: string;
+	error?: Error;
+}
 
 export interface CharacterDetails {
 	choice: Character | undefined;

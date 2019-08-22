@@ -11,31 +11,33 @@ import { Character } from '../../widgets/character/Character';
 import { createInterval } from '../../util/timer';
 import * as css from './results.m.css';
 import bundle from './results.nls';
+import { isLoading } from '../../processes/middleware/request';
 
 @theme(css)
 export class Results extends I18nMixin(ThemedMixin(WidgetBase)) {
-	private _update?: () => void;
+	private _store?: Store<State>;
 
 	protected onAttach() {
-		this.updateResults();
-		this.own(createInterval(() => this.updateResults, 3000));
+		this.own(createInterval(() => { this._updateResults() }, 2000));
 	}
 
-	private updateResults() {
-		this._update && this._update();
+	private _updateResults() {
+		if (this._store && !isLoading(this._store, updateResultsProcess)) {
+			updateResultsProcess(this._store)({})
+		}
 	}
 
 	protected render() {
 		return (
-			<StoreProvider stateKey="state" paths={(path: StatePaths<any>) => [path('results')]}
+			<StoreProvider stateKey="state" paths={(path: StatePaths<any>) => [path('results'), path('config')]}
 				renderer={(store: Store<State>) => {
+					this._store = store;
 					const { get, path } = store;
-					const results = get(path('results')) || {};
+					const results = get(path('results'));
 					const choices = get(path('config', 'choices')) || [];
 
-					if (!this._update) {
-						this._update = () => { updateResultsProcess(store)({}) };
-						this._update();
+					if (isLoading(this._store, updateResultsProcess) == null) {
+						this._updateResults();
 					}
 
 					return (

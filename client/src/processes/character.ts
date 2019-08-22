@@ -4,6 +4,8 @@ import { replace } from '@dojo/framework/stores/state/operations';
 
 import { State } from '../interfaces';
 import { url } from '../util/fetch';
+import { requestMiddleware } from './middleware/request';
+import { createNamedProcess } from './processes';
 
 export interface SetChoiceOpts {
 	choice: State['character']['choice'];
@@ -62,6 +64,6 @@ const setExcitement = commandFactory<SetExcitementOpts>(({ get, path, payload })
 	return [replace(path('character', 'excitement'), payload.excitement)];
 });
 
-export const updateResultsProcess = createProcess('update-results', [fetchResults]);
-export const setChoiceProcess = createProcess('set-choice', [setChoice, postChoice]);
+export const updateResultsProcess = createNamedProcess('update-results', [fetchResults], [ requestMiddleware ]);
+export const setChoiceProcess = createNamedProcess('set-choice', [setChoice, postChoice], [ requestMiddleware ]);
 export const setExcitementProcess = createProcess('set-excitement', [setExcitement]);
