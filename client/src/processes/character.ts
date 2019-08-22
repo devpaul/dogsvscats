@@ -2,7 +2,8 @@ import { entries } from '@dojo/framework/shim/object';
 import { createCommandFactory, createProcess } from '@dojo/framework/stores/process';
 import { replace } from '@dojo/framework/stores/state/operations';
 
-import { State } from './interfaces';
+import { State } from '../interfaces';
+import { url } from '../util/fetch';
 
 export interface SetChoiceOpts {
 	choice: State['character']['choice'];
@@ -13,8 +14,6 @@ export interface SetExcitementOpts {
 }
 
 const commandFactory = createCommandFactory<State>();
-const baseUrl = (<any>window).location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://catsvsdogs.now.sh';
-const url = `${baseUrl}/api`;
 
 function isResults(value: any): value is State['results'] {
 	return value && typeof value === 'object' && Object.keys(value).every((key) => typeof value[key] === 'number');

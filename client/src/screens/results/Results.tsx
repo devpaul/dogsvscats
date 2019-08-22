@@ -6,7 +6,7 @@ import Store, { StatePaths } from '@dojo/framework/stores/Store';
 import StoreProvider from '@dojo/framework/stores/StoreProvider';
 
 import { Character as CharacterType, State } from '../../interfaces';
-import { updateResultsProcess } from '../../processes';
+import { updateResultsProcess } from '../../processes/character';
 import { Character } from '../../widgets/character/Character';
 import { createInterval } from '../../util/timer';
 import * as css from './results.m.css';
