@@ -1,4 +1,3 @@
-import has from '@dojo/framework/core/has';
 import { I18nMixin } from '@dojo/framework/core/mixins/I18n';
 import { theme, ThemedMixin } from '@dojo/framework/core/mixins/Themed';
 import { tsx } from '@dojo/framework/core/vdom';
@@ -6,14 +5,11 @@ import { WidgetBase } from '@dojo/framework/core/WidgetBase';
 import Store, { StatePaths } from '@dojo/framework/stores/Store';
 import StoreProvider from '@dojo/framework/stores/StoreProvider';
 
-import { Character, State } from '../../interfaces';
-import { Cat } from '../../widgets/cat/Cat';
-import { Dog } from '../../widgets/dog/Dog';
-import { Spock } from '../../widgets/spock/Spock';
+import { Character as CharacterType, State } from '../../interfaces';
+import { updateResultsProcess } from '../../processes';
+import { Character } from '../../widgets/character/Character';
 import * as css from './results.m.css';
 import bundle from './results.nls';
-import { Yoda } from '../../widgets/yoda/Yoda';
-import { updateResultsProcess } from '../../processes';
 
 @theme(css)
 export class Results extends I18nMixin(ThemedMixin(WidgetBase)) {
@@ -39,13 +35,12 @@ export class Results extends I18nMixin(ThemedMixin(WidgetBase)) {
 	}
 
 	protected render() {
-		const resultList: Character[] = has('spock-vs-yoda') ? [ 'spock', 'yoda' ] : [ 'cat', 'dog' ];
-
 		return (
 			<StoreProvider stateKey="state" paths={(path: StatePaths<any>) => [path('results')]}
 				renderer={(store: Store<State>) => {
 					const { get, path } = store;
 					const results = get(path('results')) || {};
+					const choices = get(path('config', 'choices')) || [];
 
 					if (!this._update) {
 						this._update = () => { updateResultsProcess(store)({}) };
@@ -54,7 +49,11 @@ export class Results extends I18nMixin(ThemedMixin(WidgetBase)) {
 
 					return (
 						<div classes={css.root}>
-							{ resultList.map(character => this.renderResult(character, results[character]))}
+							{ choices.map(choice => {
+								const character = choice.character;
+								const count = results[character];
+								return this._renderResult(character, count);
+							})}
 						</div>
 					);
 				}}
@@ -62,31 +61,16 @@ export class Results extends I18nMixin(ThemedMixin(WidgetBase)) {
 		);
 	}
 
-	private renderResult(character: Character, count: number = 0) {
-		const { messages } = this.localizeBundle<{ [K in Character]: string }>(bundle);
+	private _renderResult(character: CharacterType, count: number = 0) {
+		const { messages } = this.localizeBundle<{ [K in CharacterType]: string }>(bundle);
 		const characterName = messages[character];
 
 		return (
 			<div>
 				<h1 classes={css.header}>{characterName}</h1>
 				<p classes={css.total}>{String(count)}</p>
-				{ this.renderCharacter(character) }
+				<Character character={character} small={true} />
 			</div>
 		);
-	}
-
-	private renderCharacter(character: Character) {
-		if (character === 'spock') {
-			return <Spock small={true} />;
-		}
-		if (character === 'yoda') {
-			return <Yoda small={true} />;
-		}
-		if (character === 'cat') {
-			return <Cat small={true} />;
-		}
-		if (character === 'dog') {
-			return <Dog small={true} />;
-		}
 	}
 }

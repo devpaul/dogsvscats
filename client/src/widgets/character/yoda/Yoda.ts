@@ -1,18 +1,14 @@
 import { WidgetBase } from '@dojo/framework/core/WidgetBase';
-import * as css from './spock.m.css';
+import * as css from './yoda.m.css';
 import { v } from '@dojo/framework/core/vdom';
 import WebAnimation from '@dojo/framework/core/meta/WebAnimation';
 import ThemedMixin from '@dojo/framework/core/mixins/Themed';
+import { CharacterProperties } from '../Character';
 
-const head = require('./spock-head.png');
-const body = require('./spock-body.png');
+const head = require('./yoda-head.png');
+const body = require('./yoda-body.png');
 
-export interface SpockProperties {
-	animationSpeed?: number;
-	small?: boolean;
-}
-
-export class Spock extends ThemedMixin(WidgetBase)<SpockProperties> {
+export class Yoda extends ThemedMixin(WidgetBase)<CharacterProperties> {
 	private _getHeadAnimation(animationSpeed: number) {
 		return {
 			id: 'character-head',
@@ -33,9 +29,9 @@ export class Spock extends ThemedMixin(WidgetBase)<SpockProperties> {
 	}
 
 	protected render() {
-		const { animationSpeed = 1, small } = this.properties;
+		const { excitement = 1, small } = this.properties;
 
-		this.meta(WebAnimation).animate('character-head', this._getHeadAnimation(animationSpeed));
+		this.meta(WebAnimation).animate('character-head', this._getHeadAnimation(excitement));
 
 		return v('div', { classes: [ css.root, small ? css.small : null ] }, [
 			v('img', { key: 'character-head', src: head, classes: css.head }),

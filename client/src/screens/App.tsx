@@ -1,25 +1,19 @@
 import { tsx } from '@dojo/framework/core/vdom';
 import WidgetBase from '@dojo/framework/core/WidgetBase';
-import has from '@dojo/framework/core/has';
 import Outlet from '@dojo/framework/routing/Outlet';
 
 import { Route } from '../routes';
 import { Results } from './results/Results';
-import CatsVsDogs from './cats-vs-dogs/CatsVsDogs';
-import SpockVsYoda from './spock-vs-yoda/SpockVsYoda';
+import { Select } from './select/Select';
 
 export default class App extends WidgetBase {
-	protected onAttach() {
-		document.title = has('spock-vs-yoda') ? 'Spock vs Yoda' : 'Cats vs Dogs';
-	}
-
 	protected render() {
 		return (
 			<div>
 				<Outlet
 					id={Route.Main}
-					key="characterSelect"
-					renderer={() => has('spock-vs-yoda') ? <SpockVsYoda /> : <CatsVsDogs /> }
+					key="select"
+					renderer={() => <Select />}
 				/>
 				<Outlet
 					id={Route.Results}

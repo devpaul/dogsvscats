@@ -1,8 +1,8 @@
-import { State } from './interfaces';
-import { createCommandFactory, createProcess } from '@dojo/framework/stores/process';
-import { add, replace } from '@dojo/framework/stores/state/operations';
-import { uuid } from '@dojo/framework/core/util';
 import { entries } from '@dojo/framework/shim/object';
+import { createCommandFactory, createProcess } from '@dojo/framework/stores/process';
+import { replace } from '@dojo/framework/stores/state/operations';
+
+import { State } from './interfaces';
 
 export interface SetChoiceOpts {
 	choice: State['character']['choice'];
@@ -15,20 +15,6 @@ export interface SetExcitementOpts {
 const commandFactory = createCommandFactory<State>();
 const baseUrl = (<any>window).location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://catsvsdogs.now.sh';
 const url = `${baseUrl}/api`;
-
-// Command that creates the basic initial state
-export const initialStateCommand = commandFactory(({ path }) => {
-	return [
-		add(path('character'), {
-			choice: undefined,
-			excitement: 1
-		}),
-		add(path('results'), {}),
-		add(path('user'), {
-			uuid: uuid()
-		})
-	];
-});
 
 function isResults(value: any): value is State['results'] {
 	return value && typeof value === 'object' && Object.keys(value).every((key) => typeof value[key] === 'number');
@@ -77,7 +63,6 @@ const setExcitement = commandFactory<SetExcitementOpts>(({ get, path, payload })
 	return [replace(path('character', 'excitement'), payload.excitement)];
 });
 
-export const initialStateProcess = createProcess('initial', [initialStateCommand]);
 export const updateResultsProcess = createProcess('update-results', [fetchResults]);
 export const setChoiceProcess = createProcess('set-choice', [setChoice, postChoice]);
 export const setExcitementProcess = createProcess('set-excitement', [setExcitement]);

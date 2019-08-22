@@ -3,18 +3,14 @@ import { WidgetBase } from '@dojo/framework/core/WidgetBase';
 import * as css from './dog.m.css';
 import { v } from '@dojo/framework/core/vdom';
 import WebAnimation from '@dojo/framework/core/meta/WebAnimation';
+import { CharacterProperties } from '../Character';
 
 const head = require('./dog-head.png');
 const body = require('./dog-body.png');
 const tail = require('./dog-tail.png');
 
-export interface DogProperties {
-	animationSpeed?: number;
-	small?: boolean;
-}
-
 @theme(css)
-export class Dog extends ThemedMixin(WidgetBase)<DogProperties> {
+export class Dog extends ThemedMixin(WidgetBase)<CharacterProperties> {
 	private _getHeadAnimation(animationSpeed: number) {
 		return {
 			id: 'dog-head',
@@ -46,10 +42,10 @@ export class Dog extends ThemedMixin(WidgetBase)<DogProperties> {
 	}
 
 	protected render() {
-		const { animationSpeed = 1, small } = this.properties;
+		const { excitement = 1, small } = this.properties;
 
-		this.meta(WebAnimation).animate('dog-head', this._getHeadAnimation(animationSpeed));
-		this.meta(WebAnimation).animate('dog-tail', this._getTailAnimation(animationSpeed));
+		this.meta(WebAnimation).animate('dog-head', this._getHeadAnimation(excitement));
+		this.meta(WebAnimation).animate('dog-tail', this._getTailAnimation(excitement));
 
 		return v('div', { classes: [ css.root, small ? css.small : null ] }, [
 			v('img', { key: 'dog-head', src: head, classes: css.head }),

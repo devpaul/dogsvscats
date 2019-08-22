@@ -3,17 +3,13 @@ import * as css from './cat.m.css';
 import { v } from '@dojo/framework/core/vdom';
 import WebAnimation from '@dojo/framework/core/meta/WebAnimation';
 import ThemedMixin from '@dojo/framework/core/mixins/Themed';
+import { CharacterProperties } from '../Character';
 
 const head = require('./cat-head.png');
 const body = require('./cat-body.png');
 const tail = require('./cat-tail.png');
 
-export interface CatProperties {
-	animationSpeed?: number;
-	small?: boolean;
-}
-
-export class Cat extends ThemedMixin(WidgetBase)<CatProperties> {
+export class Cat extends ThemedMixin(WidgetBase)<CharacterProperties> {
 	private _getHeadAnimation(animationSpeed: number) {
 		return {
 			id: 'cat-head',
@@ -53,10 +49,10 @@ export class Cat extends ThemedMixin(WidgetBase)<CatProperties> {
 	}
 
 	protected render() {
-		const { animationSpeed = 1, small } = this.properties;
+		const { excitement = 1, small } = this.properties;
 
-		this.meta(WebAnimation).animate('cat-head', this._getHeadAnimation(animationSpeed));
-		this.meta(WebAnimation).animate('cat-tail', this._getTailAnimation(animationSpeed));
+		this.meta(WebAnimation).animate('cat-head', this._getHeadAnimation(excitement));
+		this.meta(WebAnimation).animate('cat-tail', this._getTailAnimation(excitement));
 
 		return v('div', { classes: [ css.root, small ? css.small : null ] }, [
 			v('img', { key: 'cat-head', src: head, classes: css.head }),
