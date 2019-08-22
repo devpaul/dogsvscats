@@ -5,7 +5,7 @@ import Store from '@dojo/framework/stores/Store';
 import StoreProvider from '@dojo/framework/stores/StoreProvider';
 
 import { State, CharacterConfig } from '../../interfaces';
-import { setChoiceProcess, setExcitementProcess } from '../../processes';
+import { setChoiceProcess, setExcitementProcess } from '../../processes/character';
 import * as css from './select.m.css';
 import { CharacterDisplay } from '../../widgets/character-display/CharacterDisplay';
 import { Character } from '../../widgets/character/Character';

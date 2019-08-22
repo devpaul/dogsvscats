@@ -1,10 +1,10 @@
 {
-  "name": "catsvsdogs",
+  "name": "spockvsyoda",
   "version": "1.0.0",
   "dependencies": {},
   "devDependencies": {
     "gh-pages": "^2.0.1",
-    "now": "^11.5.2",
+    "now": "~16.1.2",
     "prettier": "^1.14.3"
   },
   "scripts": {
