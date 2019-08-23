@@ -25,6 +25,16 @@ CatsvsDogs can be deployed to [Now] using `npm run deploy:now`. You will need to
 
 The client can also be deployed to Github pages using `npm run deploy:gh`
 
+### Docker
+
+Build the image
+
+`docker build -t "catsvsdogs" .`
+
+Run the image
+
+`docker run -p <local port>:3000 catsvsdogs`
+
 ## Client
 
 The client, located under the `client` directory, is built using [Dojo CLI].
