@@ -1,16 +1,25 @@
-import { cache } from '@dojo/framework/core/middleware/cache';
+import { Handle } from '@dojo/framework/core/Destroyable';
 import { uuid } from '@dojo/framework/core/util';
 import { create, destroy } from '@dojo/framework/core/vdom';
 
-const factory = create({ destroy, cache });
+const factory = create({ destroy });
 
-export const interval = factory(function({ middleware: { destroy, cache }}) {
+export const interval = factory(function({ middleware: { destroy }}) {
+	const map: Map<string, Handle> = new Map();
+
+	destroy(() => {
+		for (const handle of map.values()) {
+			handle.destroy();
+		}
+		map.clear();
+	});
+
 	return function (callback: () => void, milliseconds: number, name: string = uuid(), callImmediate: boolean = false) {
-		if (cache.get(name) == null) {
+		if (!map.has(name)) {
 			const interval = setInterval(callback, milliseconds);
 			const handle = {
 				destroy() {
-					cache.set(name, undefined);
+					map.delete(name);
 					if (typeof interval === 'number') {
 						clearInterval(interval);
 					}
@@ -19,10 +28,7 @@ export const interval = factory(function({ middleware: { destroy, cache }}) {
 					}
 				}
 			}
-			cache.set(name, handle);
-			destroy(() => {
-				handle.destroy();
-			});
+			map.set(name, handle);
 			if (callImmediate) {
 				callback();
 			}
