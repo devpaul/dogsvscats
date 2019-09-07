@@ -21,8 +21,7 @@ export const interval = factory(function({ middleware: { destroy, cache }}) {
 			}
 			cache.set(name, handle);
 			destroy(() => {
-				const handle = cache.get(name);
-				handle && handle.destroy();
+				handle.destroy();
 			});
 			if (callImmediate) {
 				callback();
