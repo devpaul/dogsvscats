@@ -1,6 +1,4 @@
-import ThemedMixin from '@dojo/framework/core/mixins/Themed';
-import { tsx } from '@dojo/framework/core/vdom';
-import { WidgetBase } from '@dojo/framework/core/WidgetBase';
+import { create, tsx } from '@dojo/framework/core/vdom';
 
 import { SoundConfig } from '../../interfaces';
 import { Faction } from '../character-display/faction/Faction';
@@ -16,23 +14,25 @@ export interface CharacterDisplayProperties {
 	onPlaySound?(sound: string, excitement: number): void;
 }
 
-export class CharacterDisplay extends ThemedMixin(WidgetBase)<CharacterDisplayProperties> {
-	protected render() {
-		switch (this.properties.type) {
-			case 'faction':
-				return (
-					<Faction { ... this.properties }>
-						{this.children}
-					</Faction>
-				);
-			case 'pet':
-				return (
-					<Pet { ... this.properties }>
-						{this.children}
-					</Pet>
-				);
-		}
+const factory = create().properties<CharacterDisplayProperties>();
 
-		return undefined;
+export const CharacterDisplay = factory(function({ properties, children }) {
+	const { type } = properties();
+
+	switch (type) {
+		case 'faction':
+			return (
+				<Faction { ... properties() }>
+					{children()}
+				</Faction>
+			);
+		case 'pet':
+			return (
+				<Pet { ... properties() }>
+					{children()}
+				</Pet>
+			);
 	}
-}
+
+	return undefined;
+});
