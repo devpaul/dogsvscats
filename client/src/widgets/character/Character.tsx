@@ -1,12 +1,9 @@
-import ThemedMixin from '@dojo/framework/core/mixins/Themed';
-import { tsx } from '@dojo/framework/core/vdom';
-import { WidgetBase } from '@dojo/framework/core/WidgetBase';
-
+import { create, tsx } from '@dojo/framework/core/vdom';
+import { SoundConfig } from '../../interfaces';
 import { Cat } from './cat/Cat';
 import { Dog } from './dog/Dog';
 import { Spock } from './spock/Spock';
 import { Yoda } from './yoda/Yoda';
-import { SoundConfig } from '../../interfaces';
 
 export interface CharacterProperties {
 	character: string;
@@ -17,17 +14,20 @@ export interface CharacterProperties {
 	onPlaySound?(sound: string, rate: number): void;
 }
 
-export class Character extends ThemedMixin(WidgetBase)<CharacterProperties> {
-	protected render() {
-		switch (this.properties.character) {
-			case 'cat':
-				return (<Cat { ... this.properties } />);
-			case 'dog':
-				return (<Dog { ... this.properties } />);
-			case 'spock':
-				return (<Spock { ... this.properties } />);
-			case 'yoda':
-				return (<Yoda { ... this.properties } />);
-		}
+
+const factory = create().properties<CharacterProperties>();
+
+export const Character = factory(function({ properties }) {
+	const { character } = properties();
+
+	switch (character) {
+		case 'cat':
+			return (<Cat { ... properties() } />);
+		case 'dog':
+			return (<Dog { ... properties() } />);
+		case 'spock':
+			return (<Spock { ... properties() } />);
+		case 'yoda':
+			return (<Yoda { ... properties() } />);
 	}
-}
+});
