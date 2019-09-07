@@ -2,7 +2,8 @@ import { ProcessCallback, createCommandFactory, createProcess } from '@dojo/fram
 import { State } from '../../interfaces';
 import { replace } from '@dojo/framework/stores/state/operations';
 import { NamedProcess } from '../processes';
-import { Store } from '@dojo/framework/stores/Store';
+import { create } from '@dojo/framework/core/vdom';
+import { store } from '../../middleware/store';
 
 const commandFactory = createCommandFactory<State>();
 
@@ -49,6 +50,8 @@ export const requestMiddleware: ProcessCallback<State> = () => ({
 	}
 });
 
-export function isLoading({ get, path }: Store<State>, { id }: NamedProcess) {
-	return get(path('request', id, 'isLoading'));
-}
+export const isLoading = create({ store })(function({ middleware: { store: { get, path } }}) {
+	return function(process: NamedProcess) {
+		return get(path('request', process.id, 'isLoading'));
+	}
+});

@@ -1,78 +1,79 @@
-import I18nMixin from '@dojo/framework/core/mixins/I18n';
-import { tsx } from '@dojo/framework/core/vdom';
-import WidgetBase from '@dojo/framework/core/WidgetBase';
-import Store from '@dojo/framework/stores/Store';
-import StoreProvider from '@dojo/framework/stores/StoreProvider';
+import { create, tsx } from '@dojo/framework/core/vdom';
 
-import { State, CharacterConfig } from '../../interfaces';
+import { CharacterConfig } from '../../interfaces';
+import { store } from '../../middleware/store';
 import { setChoiceProcess, setExcitementProcess } from '../../processes/character';
-import * as css from './select.m.css';
 import { CharacterDisplay } from '../../widgets/character-display/CharacterDisplay';
 import { Character } from '../../widgets/character/Character';
-import { CoreAudio } from '../../CoreAudio';
+import { player } from '../../middleware/player';
+import * as css from './select.m.css';
 
 function setDocumentTitle(title: string) {
 	document.title = title;
 }
 
-export class Select extends I18nMixin(WidgetBase) {
-	private audio = new CoreAudio();
+const factory = create({ store, player });
 
-	protected render() {
-		return (
-			<StoreProvider stateKey="state" renderer={(store: Store<State>) => this._renderSelect(store)} />
-		);
-	}
+export const Select = factory(function({ middleware: { player, store: { get, path, executor }} }) {
+	const onChoiceClick = executor(setChoiceProcess);
+	const config = get(path('config'));
+	const { choice, excitement } = get(path('character'));
+	const character = config.choices.find(option => option.character === choice);
 
-	private _onPlaySound(sound: string, rate: number) {
-		this.audio.play(sound, rate);
-	}
+	setDocumentTitle(config.title);
 
-	private _renderSelect(store: Store<State>) {
-		const { get, path } = store;
-		const onChoiceClick = setChoiceProcess(store);
-		const config = get(path('config'));
-		const { choice, excitement } = get(path('character'));
-		const character = config.choices.find(option => option.character === choice);
+	return (
+		<div classes={css.root}>
+			<header classes={css.header}>
+				{ config.choices.map(choice => (
+					<button classes={css.button} onclick={() => { onChoiceClick({ choice: choice.character }) }}>{choice.choiceName}</button>
+				))}
+			</header>
+			{ character ?
+				<SelectedCharacter
+					choice={character} excitement={excitement}
+					playSound={ player.play }
+					onExcitementChange={(excitement: number) => executor(setExcitementProcess)({ excitement })}
+				/> : <Prompt prompt={config.prompt} /> }
+		</div>
+	);
+});
 
-		setDocumentTitle(config.title);
-
-		return (
-			<div classes={css.root}>
-				<header classes={css.header}>
-					{ config.choices.map(choice => (
-						<button classes={css.button} onclick={() => { onChoiceClick({ choice: choice.character }) }}>{choice.choiceName}</button>
-					))}
-				</header>
-				{ character ? this._renderCharacter(store, character, excitement) : this._renderPrompt(config.prompt) }
-			</div>
-		);
-	}
-
-	private _renderCharacter(store: Store<State>, choice: CharacterConfig, excitement: number) {
-		const playSound = (sound: string, rate: number) => this._onPlaySound(sound, rate);
-		const onExcitementChange = (excitement: number) => setExcitementProcess(store)({ excitement })
-
-		return <CharacterDisplay
-			type={choice.type}
-			choiceName={choice.choiceName}
-			excitement={excitement}
-			logo={choice.logo}
-			sounds={choice.sound}
-			onExcitementChange={onExcitementChange}
-			onPlaySound={playSound}
-		>
-			<Character
-				character={choice.character}
-				excitement={excitement}
-				sounds={choice.sound}
-				onPlaySound={playSound}
-				onExcitementChange={onExcitementChange}
-			/>
-		</CharacterDisplay>
-	}
-
-	private _renderPrompt(prompt: string) {
-		return (<p>{prompt}</p>);
-	}
+interface CharacterProperties {
+	choice: CharacterConfig;
+	excitement: number;
+	playSound: (sound: string, rate: number) => void;
+	onExcitementChange: (excitement: number) => void;
 }
+
+const SelectedCharacter = create().properties<CharacterProperties>()(function({ properties }) {
+	const { choice, excitement, playSound, onExcitementChange } = properties();
+
+	return <CharacterDisplay
+		type={choice.type}
+		choiceName={choice.choiceName}
+		excitement={excitement}
+		logo={choice.logo}
+		sounds={choice.sound}
+		onExcitementChange={onExcitementChange}
+		onPlaySound={playSound}
+	>
+		<Character
+			character={choice.character}
+			excitement={excitement}
+			sounds={choice.sound}
+			onPlaySound={playSound}
+			onExcitementChange={onExcitementChange}
+		/>
+	</CharacterDisplay>
+})
+
+
+interface SelectProperties {
+	prompt: string;
+}
+
+const Prompt = create().properties<SelectProperties>()(function({ properties }) {
+	const { prompt } = properties();
+	return (<p>{prompt}</p>);
+});

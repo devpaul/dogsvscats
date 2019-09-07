@@ -1,69 +1,54 @@
-import { I18nMixin } from '@dojo/framework/core/mixins/I18n';
-import { theme, ThemedMixin } from '@dojo/framework/core/mixins/Themed';
-import { tsx } from '@dojo/framework/core/vdom';
-import { WidgetBase } from '@dojo/framework/core/WidgetBase';
-import Store, { StatePaths } from '@dojo/framework/stores/Store';
-import StoreProvider from '@dojo/framework/stores/StoreProvider';
+import { i18n } from '@dojo/framework/core/middleware/i18n';
+import { create, tsx } from '@dojo/framework/core/vdom';
 
-import { Character as CharacterType, State } from '../../interfaces';
+import { Character as CharacterType } from '../../interfaces';
+import { interval } from '../../middleware/interval';
+import { store } from '../../middleware/store';
 import { updateResultsProcess } from '../../processes/character';
+import { isLoading } from '../../processes/middleware/request';
 import { Character } from '../../widgets/character/Character';
-import { createInterval } from '../../util/timer';
 import * as css from './results.m.css';
 import bundle from './results.nls';
-import { isLoading } from '../../processes/middleware/request';
 
-@theme(css)
-export class Results extends I18nMixin(ThemedMixin(WidgetBase)) {
-	private _store?: Store<State>;
+const factory = create({ interval, store, isLoading });
 
-	protected onAttach() {
-		this.own(createInterval(() => { this._updateResults() }, 2000));
-	}
+export const Results = factory(function({ middleware: { interval, store, isLoading } }) {
+	const  { executor, get, path } = store;
+	const results = get(path('results'));
+	const choices = get(path('config', 'choices')) || [];
 
-	private _updateResults() {
-		if (this._store && !isLoading(this._store, updateResultsProcess)) {
-			updateResultsProcess(this._store)({})
+	interval(() => {
+		if (!isLoading(updateResultsProcess)) {
+			executor(updateResultsProcess)({});
 		}
-	}
+	}, 2000, 'updateResults', true);
 
-	protected render() {
-		return (
-			<StoreProvider stateKey="state" paths={(path: StatePaths<any>) => [path('results'), path('config')]}
-				renderer={(store: Store<State>) => {
-					this._store = store;
-					const { get, path } = store;
-					const results = get(path('results'));
-					const choices = get(path('config', 'choices')) || [];
+	return (
+		<div classes={css.root}>
+			{ choices.map(choice => {
+				const character = choice.character;
+				const count = results[character];
+				return <Result character={character} count={count} />
+			})}
+		</div>
+	);
+});
 
-					if (isLoading(this._store, updateResultsProcess) == null) {
-						this._updateResults();
-					}
-
-					return (
-						<div classes={css.root}>
-							{ choices.map(choice => {
-								const character = choice.character;
-								const count = results[character];
-								return this._renderResult(character, count);
-							})}
-						</div>
-					);
-				}}
-			/>
-		);
-	}
-
-	private _renderResult(character: CharacterType, count: number = 0) {
-		const { messages } = this.localizeBundle<{ [K in CharacterType]: string }>(bundle);
-		const characterName = messages[character];
-
-		return (
-			<div>
-				<h1 classes={css.header}>{characterName}</h1>
-				<p classes={css.total}>{String(count)}</p>
-				<Character character={character} small={true} />
-			</div>
-		);
-	}
+interface ResultProperties {
+	count: number;
+	character: CharacterType;
 }
+
+const Result = create({ i18n }).properties<ResultProperties>()(function({ middleware: { i18n }, properties }) {
+	const { count, character } = properties();
+	const { messages } = i18n.localize<{ [K in CharacterType]: string }>(bundle);
+	const characterName = messages[character];
+
+	return (
+		<div>
+			<h1 classes={css.header}>{characterName}</h1>
+			<p classes={css.total}>{String(count)}</p>
+			<Character character={character} small={true} />
+		</div>
+	);
+});
