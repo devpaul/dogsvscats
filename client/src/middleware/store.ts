@@ -1,10 +1,11 @@
 import global from '@dojo/framework/shim/global';
-import { uuid } from '@dojo/framework/core/util';
-import { createCommandFactory, createProcess } from '@dojo/framework/stores/process';
+import createStoreMiddleware from '@dojo/framework/core/middleware/store';
+import { State, User } from "../interfaces";
+import Store from '@dojo/framework/stores/Store';
+import { createProcess, createCommandFactory } from '@dojo/framework/stores/process';
 import { add } from '@dojo/framework/stores/state/operations';
 import has from '@dojo/framework/core/has';
-
-import { State, User } from '../interfaces';
+import { uuid } from '@dojo/framework/core/util';
 
 const commandFactory = createCommandFactory<State>();
 
@@ -12,7 +13,7 @@ function isUser(value: any): value is User {
 	return value && typeof value === 'object' && typeof value.uuid === 'string';
 }
 
-function fetchUserData(): User {
+function loadUserData(): User {
 	try {
 		const data = JSON.parse(global.localStorage.getItem('user'));
 		if (isUser(data)) {
@@ -27,8 +28,8 @@ function fetchUserData(): User {
 }
 
 // Command that creates the basic initial state
-export const initialStateCommand = commandFactory(({ path }) => {
-	const user = fetchUserData();
+const initialStateCommand = commandFactory(({ path }) => {
+	const user = loadUserData();
 
 	return [
 		add(path('character'), {
@@ -82,4 +83,8 @@ export const initialStateCommand = commandFactory(({ path }) => {
 	];
 });
 
-export const initialStateProcess = createProcess('initial', [initialStateCommand]);
+const initialStateProcess = createProcess('initial', [initialStateCommand]);
+
+export const store = createStoreMiddleware<State>((store: Store<State>) => {
+	initialStateProcess(store)({});
+});

@@ -1,5 +1,8 @@
 {
 	"build-app": {
+		"experimental": {
+			"speed": true
+		},
 		"pwa": {
 			"manifest": {
 				"name": "Cats Vs Dogs",

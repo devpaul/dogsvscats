@@ -1,28 +1,26 @@
-import { tsx } from '@dojo/framework/core/vdom';
-import WidgetBase from '@dojo/framework/core/WidgetBase';
+import { create, tsx } from '@dojo/framework/core/vdom';
 
 import { CharacterDisplayProperties } from '../CharacterDisplay';
 import * as css from './faction.m.css';
 
-export class Faction extends WidgetBase<CharacterDisplayProperties> {
-	protected render() {
-		const { choiceName = '', logo } = this.properties;
+const factory = create().properties<CharacterDisplayProperties>();
 
-		return (
-			<div classes={css.characterHolder}>
-				<virtual>
-					{ this.children }
-					<button classes={css.button} onclick={() => this._onPlaySound()}>
-						<img class={css.logo} src={logo} /> Join {choiceName} <i classes={css.iconSound}></i>
-					</button>
-				</virtual>
-			</div>
-		);
-	}
+export const Faction = factory(function({ properties, children }) {
+	const { choiceName = '', logo } = properties();
 
-	private _onPlaySound() {
-		const { onPlaySound, excitement, sounds: [ sound ] } = this.properties;
-
+	function onPlaySound() {
+		const { onPlaySound, excitement, sounds: [ sound ] } = properties();
 		sound && onPlaySound && onPlaySound(sound.url, excitement);
 	}
-}
+
+	return (
+		<div classes={css.characterHolder}>
+			<virtual>
+				{ children() }
+				<button classes={css.button} onclick={onPlaySound}>
+					<img class={css.logo} src={logo} /> Join {choiceName} <i classes={css.iconSound}></i>
+				</button>
+			</virtual>
+		</div>
+	);
+});

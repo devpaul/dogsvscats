@@ -1,4 +1,4 @@
-import { AnimationProperties } from '@dojo/framework/widget-core/meta/WebAnimation';
+import { AnimationProperties } from '@dojo/framework/core/meta/WebAnimation';
 
 export function headTilt(id: string): AnimationProperties {
 	const effects = [
