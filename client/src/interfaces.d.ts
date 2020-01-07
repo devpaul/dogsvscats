@@ -6,7 +6,7 @@ export interface State {
 	user: User;
 }
 
-export type Character = 'cat' | 'dog' | 'spock' | 'yoda';
+export type CharacterName = 'cat' | 'dog' | 'spock' | 'yoda' | 'trinity' | 'jolie';
 
 export type CharacterDisplay = 'pet' | 'faction';
 
@@ -21,7 +21,7 @@ export interface RequestDetails {
 }
 
 export interface CharacterDetails {
-	choice: Character | undefined;
+	choice: CharacterName | undefined;
 	excitement: number;
 }
 
@@ -32,7 +32,7 @@ export interface Config {
 }
 
 export interface CharacterConfig {
-	character: Character;
+	character: CharacterName;
 	choiceName: string;
 	sound: SoundConfig[];
 	type: CharacterDisplay;
@@ -40,7 +40,7 @@ export interface CharacterConfig {
 }
 
 export type Results = {
-	[K in Character]: number;
+	[K in CharacterName]: number;
 }
 
 export interface SoundConfig {

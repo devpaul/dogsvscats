@@ -2,7 +2,9 @@ const messages = {
 	cat: 'Cats',
 	dog: 'Dogs',
 	spock: 'Spock',
-	yoda: 'Yoda'
+	yoda: 'Yoda',
+	jolie: 'AcidBurn',
+	trinity: 'Trinity'
 }
 
 export default { messages };
