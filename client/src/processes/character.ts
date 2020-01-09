@@ -3,7 +3,7 @@ import { createCommandFactory, createProcess } from '@dojo/framework/stores/proc
 import { replace } from '@dojo/framework/stores/state/operations';
 
 import { State } from '../interfaces';
-import { url } from '../util/fetch';
+import { url } from '../config';
 import { requestMiddleware } from './middleware/request';
 import { createNamedProcess } from './processes';
 
