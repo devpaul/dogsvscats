@@ -2,7 +2,7 @@ import { entries } from '@dojo/framework/shim/object';
 import { createCommandFactory, createProcess } from '@dojo/framework/stores/process';
 import { replace } from '@dojo/framework/stores/state/operations';
 
-import { State } from '../interfaces';
+import { State, Results } from '../interfaces';
 import { url } from '../config';
 import { requestMiddleware } from './middleware/request';
 import { createNamedProcess } from './processes';
@@ -17,7 +17,7 @@ export interface SetExcitementOpts {
 
 const commandFactory = createCommandFactory<State>();
 
-function isResults(value: any): value is State['results'] {
+function isResults(value: any): value is Results {
 	return value && typeof value === 'object' && Object.keys(value).every((key) => typeof value[key] === 'number');
 }
 

@@ -2,7 +2,7 @@ export interface State {
 	request: Requests;
 	character: CharacterDetails;
 	config: Config;
-	results: Results;
+	results?: Results;
 	user: User;
 }
 

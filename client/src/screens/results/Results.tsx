@@ -27,7 +27,7 @@ export const Results = factory(function({ middleware: { interval, store, isLoadi
 		<div classes={css.root}>
 			{ choices.map(choice => {
 				const character = choice.character;
-				const count = results[character];
+				const count = results ? results[character] : 0;
 				return <Result character={character} count={count} />
 			})}
 		</div>

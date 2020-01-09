@@ -38,7 +38,6 @@ const initialStateCommand = commandFactory(({ path }) => {
 			choice: undefined,
 			excitement: 1
 		}),
-		add(path('results'), {}),
 		add(path('user'), user),
 		add(path('config'), {
 			title,
