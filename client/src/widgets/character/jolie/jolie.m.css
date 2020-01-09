@@ -1,0 +1,13 @@
+.head {
+	position: absolute;
+	left: 146px;
+	bottom: 313px;
+	z-index: 3;
+}
+
+.body {
+	position: absolute;
+	bottom: 0px;
+	left: 165px;
+	z-index: 2;
+}

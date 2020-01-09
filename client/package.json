@@ -25,6 +25,7 @@
     "build:watch": "dojo build -m dev -w",
     "build:cats": "dojo build app",
     "build:spock": "dojo build app -f \"spock-vs-yoda\"",
+    "build:hvm": "dojo build app -f \"hackers-vs-matrix\"",
     "clean": "rimraf output",
     "pretty": "prettier --write \"src/**/*.md\" \"src/**/*.ts\" \"tests/**/*.ts\"",
     "test": "dojo test -u -n",

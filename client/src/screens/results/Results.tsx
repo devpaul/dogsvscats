@@ -1,7 +1,7 @@
 import { i18n } from '@dojo/framework/core/middleware/i18n';
 import { create, tsx } from '@dojo/framework/core/vdom';
 
-import { Character as CharacterType } from '../../interfaces';
+import { CharacterName } from '../../interfaces';
 import { interval } from '../../middleware/interval';
 import { store } from '../../middleware/store';
 import { updateResultsProcess } from '../../processes/character';
@@ -36,12 +36,12 @@ export const Results = factory(function({ middleware: { interval, store, isLoadi
 
 interface ResultProperties {
 	count: number;
-	character: CharacterType;
+	character: CharacterName;
 }
 
 const Result = create({ i18n }).properties<ResultProperties>()(function({ middleware: { i18n }, properties }) {
 	const { count, character } = properties();
-	const { messages } = i18n.localize<{ [K in CharacterType]: string }>(bundle);
+	const { messages } = i18n.localize<{ [K in CharacterName]: string }>(bundle);
 	const characterName = messages[character];
 
 	return (
