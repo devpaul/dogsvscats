@@ -7,13 +7,19 @@ const config: Config = {
 		{
 			character: 'trinity',
 			choiceName: 'The Matrix',
-			sound: [],
+			sound: [
+				{ name: '', url: 'matrix/trinity1.mp3'},
+				{ name: '', url: 'matrix/trinity2.mp3'},
+			],
 			type: 'faction'
 		},
 		{
 			character: 'jolie',
 			choiceName: 'Hackers',
-			sound: [],
+			sound: [
+				{ name: '', url: 'hackers/acidburn1.mp3'},
+				{ name: '', url: 'hackers/acidburn2.mp3'},
+			],
 			type: 'faction'
 		}
 	]
