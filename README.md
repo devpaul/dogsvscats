@@ -1,4 +1,4 @@
-# Cat vs. Dogs
+# Cats vs. Dogs
 
 This project was generated with the [Dojo CLI] & [Dojo CLI create app command](https://github.com/dojo/cli-create-app).
 
@@ -33,7 +33,11 @@ Build the image
 
 Run the image
 
-`docker run -p <local port>:3000 catsvsdogs`
+`docker run -p 3000 --name versus catsvsdogs`
+
+Debug the image
+
+`docker exec -it versus /bin/bash`
 
 ## Client
 

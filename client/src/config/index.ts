@@ -7,11 +7,22 @@ const config = has('spock-vs-yoda') && spockVsYodaConfig ||
 				has('hackers-vs-matrix') && matrixVsHackersConfig ||
 				catsVsDogsConfig;
 
-function useExternalServer() {
+function getAPIServer() {
 	const location: Location = (<any>window).location;
-	return !location.hostname.includes('github') || location.hash.includes('useServerHost');
+	const query = location.search.substr(1).split('&').filter(str => str.indexOf('host') === 0).map(str => str.split('='));
+	const host = query[0] ? query[0][1] : (location.hostname.includes('github') ? 'devpaul' : 'local');
+	const protocol = location.protocol;
+
+	switch (host) {
+		case 'devpaul':
+			return `${protocol}//app.devpaul.com`;
+		case 'local':
+			return '';
+		default:
+			return '';
+	}
 }
 
-export const baseUrl = useExternalServer() ? 'http://app.devpaul.com' : '';
+export const baseUrl = getAPIServer();
 export const url = `${baseUrl}/api`;
 export default config;
