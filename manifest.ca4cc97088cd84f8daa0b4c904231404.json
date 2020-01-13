@@ -1,0 +1,27 @@
+{
+  "icons": [
+    {
+      "src": "icon_128x128.9b02cd3ff88fec16e9eaa858c2ecb3d5.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_256x256.7ec332e78737fa37082024cec724ea03.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_512x512.93d9cffe54552d54a990b879d4fc9d6e.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "name": "Cats Vs Dogs",
+  "short_name": "CatsVsDogs",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": ".",
+  "background_color": "#ffffff",
+  "theme_color": "#2c48eb",
+  "description": "App to decide if cats or dogs are better"
+}
