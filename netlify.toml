@@ -1,0 +1,5 @@
+[build]
+  base = "."
+  command = "npm run build:netlify"
+  functions = "packages/netlify/dist/api"
+  publish = "packages/client/output/dist"

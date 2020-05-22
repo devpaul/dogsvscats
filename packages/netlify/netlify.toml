@@ -1,4 +1,3 @@
 [build]
   command = "npm run build"
-  functions = "output"
-  publish = "build"
+  functions = "./dist/api"

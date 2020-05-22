@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
+    "clean": "shx rm -rf output",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node ./src",
     "start:dev": "cross-env NODE_ENV=dev ts-node ./src"
@@ -22,6 +23,7 @@
     "mongodb": "^3.5.7",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.3.3",
+    "shx": "^0.3.2",
     "ts-node": "^7.0.1",
     "typescript": "^3.1.6"
   }

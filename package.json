@@ -10,6 +10,7 @@
   },
   "scripts": {
     "build": "lerna run build",
+    "clean": "lerna run clean",
     "deploy:gh": "npm run build && node ./support/publish",
     "deploy:now": "now --npm --public",
     "postinstall": "lerna bootstrap",
