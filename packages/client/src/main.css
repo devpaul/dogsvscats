@@ -1,0 +1,16 @@
+/* Put your styles and imports here */
+body {
+	margin: 0;
+	padding: 0;
+	color: #2a2a2a;
+	background: #fff;
+	width: 100%;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+@font-face {
+	font-family: 'icomoon';
+	src:  url('./assets/icomoon.woff?kbtvv7') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}

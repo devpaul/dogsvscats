@@ -1,0 +1,41 @@
+{
+  "name": "catsvsdogs",
+  "version": "1.0.0",
+  "dependencies": {
+    "@dojo/cli-test-intern": "6.0.1",
+    "@dojo/cli": "6.0.0",
+    "@dojo/cli-build-app": "6.0.9",
+    "@dojo/framework": "6.0.3",
+    "@dojo/themes": "^5.0.1",
+    "@dojo/widgets": "6.1.0",
+    "@types/node": "~9.6.5",
+    "@types/web-animations-js": "2.2.6",
+    "tslib": "~1.10.0",
+    "web-animations-js": "2.3.2",
+    "typescript": "^3.7.4"
+  },
+  "devDependencies": {
+    "gh-pages": "^2.0.1",
+    "prettier": "^1.14.3",
+    "rimraf": "^3.0.0"
+  },
+  "scripts": {
+    "build": "dojo build",
+    "build:dev": "tsc && dojo build -m dev",
+    "build:watch": "dojo build -m dev -w",
+    "build:cats": "dojo build app",
+    "build:spock": "dojo build app -f \"spock-vs-yoda\"",
+    "build:hvm": "dojo build app -f \"hackers-vs-matrix\"",
+    "clean": "rimraf output",
+    "pretty": "prettier --write \"src/**/*.md\" \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "test": "dojo test -u -n",
+    "watch": "dojo build app -s -m dev -w memory"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "tabWidth": 4,
+    "useTabs": true,
+    "printWidth": 120,
+    "arrowParens": "always"
+  }
+}
