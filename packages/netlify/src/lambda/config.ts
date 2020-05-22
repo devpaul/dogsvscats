@@ -1,12 +1,20 @@
-import { Handler } from 'aws-lambda';
-import { NetlifyEvent, NetlifyResponse } from '../interface';
+import catsvsdogsConfig from '../configs/catsvsdogs';
+import { NetlifyFunction } from '../interface';
 
-export const handler: Handler<NetlifyEvent, NetlifyResponse> = async function(event, context) {
+export const handler: NetlifyFunction = async function(event, context) {
 	switch (event.httpMethod) {
+		case 'GET':
+			return get(event, context);
 		default:
 			return {
-				statusCode: 200,
-				body: 'hello world!'
+				statusCode: 404
 			};
 	}
+};
+
+const get: NetlifyFunction = (event, context) => {
+	return {
+		statusCode: 200,
+		body: JSON.stringify(catsvsdogsConfig)
+	};
 };

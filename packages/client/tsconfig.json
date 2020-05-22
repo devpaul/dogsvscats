@@ -1,5 +1,6 @@
 {
 	"compilerOptions": {
+		"baseUrl": ".",
 		"declaration": false,
 		"experimentalDecorators": true,
 		"jsx": "react",
@@ -23,10 +24,10 @@
 		"sourceMap": true,
 		"strict": true,
 		"target": "es5",
-		"types": [ "intern" ]
+		"types": ["intern"],
+		"paths": {
+			"catsvsdogs": ["../@types/catsvsdogs"]
+		}
 	},
-	"include": [
-		"./src/**/*.ts",
-		"./tests/**/*.ts"
-	]
+	"include": ["./src/**/*.ts", "./tests/**/*.ts"]
 }

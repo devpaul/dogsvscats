@@ -1,11 +1,16 @@
 {
+	"extends": "../../tsconfig.base.json",
 	"compilerOptions": {
+		"baseUrl": ".",
 		"target": "ES2018",
 		"module": "commonjs",
 		"outDir": "./output/build",
 		"strict": true,
 		"esModuleInterop": true,
 		"skipLibCheck": true,
-		"forceConsistentCasingInFileNames": true
+		"forceConsistentCasingInFileNames": true,
+		"paths": {
+			"catsvsdogs": ["../@types/catsvsdogs"]
+		}
 	}
 }
