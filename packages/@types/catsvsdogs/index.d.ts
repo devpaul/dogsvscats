@@ -1,3 +1,12 @@
+export type CharacterName = 'cat' | 'dog' | 'spock' | 'yoda' | 'trinity' | 'jolie';
+
+export type CharacterDisplay = 'pet' | 'faction';
+
+export type VoteResults = { [K in CharacterName]: number };
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// CONFIG
+
 export interface Config {
 	api: ApiDefinition;
 	assets: AssetDefinition;
@@ -6,7 +15,7 @@ export interface Config {
 
 export interface ApiDefinition {
 	baseUrl: string;
-	choiceUrl: string;
+	voteUrl: string;
 	resultsUrl: string;
 }
 

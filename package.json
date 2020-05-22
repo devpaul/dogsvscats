@@ -15,6 +15,7 @@
     "deploy:now": "now --npm --public",
     "postinstall": "lerna bootstrap",
     "pretty": "prettier --write \"packages/**/*.ts\"",
+    "reset": "lerna clean",
     "start": "npm --prefix ./packages/server run start",
     "watch": "netlify dev"
   },

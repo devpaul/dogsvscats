@@ -3,8 +3,8 @@ import { Config } from 'catsvsdogs';
 const config: Pick<Config, 'api' | 'assets'> = {
 	api: {
 		baseUrl: '.netlify/functions/',
-		choiceUrl: 'choice',
-		resultsUrl: 'results'
+		resultsUrl: 'results',
+		voteUrl: 'vote'
 	},
 	assets: {
 		baseUrl: 'assets'

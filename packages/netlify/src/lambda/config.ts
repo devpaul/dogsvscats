@@ -1,20 +1,12 @@
 import catsvsdogsConfig from '../configs/catsvsdogs';
 import { NetlifyFunction } from '../interface';
+import { jsonResponse, statusResponse } from '../middleware/transform';
 
 export const handler: NetlifyFunction = async function(event, context) {
 	switch (event.httpMethod) {
 		case 'GET':
-			return get(event, context);
+			return jsonResponse(catsvsdogsConfig);
 		default:
-			return {
-				statusCode: 404
-			};
+			return statusResponse(404);
 	}
-};
-
-const get: NetlifyFunction = (event, context) => {
-	return {
-		statusCode: 200,
-		body: JSON.stringify(catsvsdogsConfig)
-	};
 };
