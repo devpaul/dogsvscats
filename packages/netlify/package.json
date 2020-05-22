@@ -4,9 +4,12 @@
   "description": "Netlify functions for Cats vs Dogs",
   "main": "index.js",
   "scripts": {
-    "build": "netlify-lambda build src/lambda",
-    "clean": "shx rm -rf dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "run-s build:ts build:netlify",
+    "build:netlify": "netlify-lambda build output/build/lambda",
+    "build:ts": "tsc",
+    "clean": "shx rm -rf dist output",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "tsc --watch"
   },
   "author": "Paul Shannon",
   "license": "MPL-2.0",

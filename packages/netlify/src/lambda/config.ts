@@ -6,7 +6,7 @@ export const handler: Handler<NetlifyEvent, NetlifyResponse> = async function(ev
 		default:
 			return {
 				statusCode: 200,
-				body: 'hello'
+				body: 'hello world!'
 			};
 	}
 };

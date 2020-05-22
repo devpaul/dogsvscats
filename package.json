@@ -15,7 +15,8 @@
     "deploy:now": "now --npm --public",
     "postinstall": "lerna bootstrap",
     "pretty": "prettier --write \"packages/**/*.ts\"",
-    "start": "npm --prefix ./packages/server run start"
+    "start": "npm --prefix ./packages/server run start",
+    "watch": "netlify dev"
   },
   "prettier": {
     "singleQuote": true,
@@ -26,5 +27,8 @@
   },
   "engines": {
     "node": "12.x"
+  },
+  "dependencies": {
+    "netlify-cli": "^2.51.0"
   }
 }
