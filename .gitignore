@@ -3,3 +3,4 @@ output
 dist
 .cert/
 .idea/
+.env

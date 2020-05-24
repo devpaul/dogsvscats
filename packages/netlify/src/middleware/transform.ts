@@ -13,3 +13,11 @@ export function statusResponse(statusCode: number): NetlifyResponse {
 		statusCode
 	};
 }
+
+export function errorResponse(error: Error | string, statusCode: number = 500): NetlifyResponse {
+	return {
+		statusCode,
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(typeof error === 'string' ? error : error.message)
+	};
+}
