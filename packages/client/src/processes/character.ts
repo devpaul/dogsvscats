@@ -1,9 +1,8 @@
 import { entries } from '@dojo/framework/shim/object';
 import { createCommandFactory, createProcess } from '@dojo/framework/stores/process';
 import { replace } from '@dojo/framework/stores/state/operations';
-
-import { State, Results } from '../interfaces';
-import { url } from '../config';
+import { apiBaseUrl, choices } from '../config';
+import { Results, State } from '../interfaces';
 import { requestMiddleware } from './middleware/request';
 import { createNamedProcess } from './processes';
 
@@ -22,11 +21,11 @@ function isResults(value: any): value is Results {
 }
 
 const fetchResults = commandFactory(async ({ get, path }) => {
-	const response = await fetch(`${url}?cb=${Date.now()}`, { method: 'GET' });
+	const response = await fetch(`${apiBaseUrl}vote/total?choices=${choices.join(',')}`, { method: 'GET' });
 	const results: unknown = await response.json();
 
 	if (response.ok && isResults(results)) {
-		return entries(results).reduce((actions: any[], [ character, count ]) => {
+		return entries(results).reduce((actions: any[], [character, count]) => {
 			if (count !== get(path('results', character))) {
 				actions.push(replace(path('results', character), count));
 			}
@@ -37,18 +36,18 @@ const fetchResults = commandFactory(async ({ get, path }) => {
 });
 
 const postChoice = commandFactory(async ({ get, path }) => {
-	const subject = get(path('character', 'choice'));
-	const uuid = get(path('user', 'uuid'));
+	const choice = get(path('character', 'choice'));
+	const voterId = get(path('user', 'uuid'));
 
-	if (subject && uuid) {
-		await fetch(url, {
+	if (choice && voterId) {
+		await fetch(`${apiBaseUrl}vote`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				subject,
-				uuid
+				choice,
+				voterId
 			})
 		});
 	}
@@ -64,6 +63,6 @@ const setExcitement = commandFactory<SetExcitementOpts>(({ get, path, payload })
 	return [replace(path('character', 'excitement'), payload.excitement)];
 });
 
-export const updateResultsProcess = createNamedProcess('update-results', [fetchResults], [ requestMiddleware ]);
-export const setChoiceProcess = createNamedProcess('set-choice', [setChoice, postChoice], [ requestMiddleware ]);
+export const updateResultsProcess = createNamedProcess('update-results', [fetchResults], [requestMiddleware]);
+export const setChoiceProcess = createNamedProcess('set-choice', [setChoice, postChoice], [requestMiddleware]);
 export const setExcitementProcess = createProcess('set-excitement', [setExcitement]);

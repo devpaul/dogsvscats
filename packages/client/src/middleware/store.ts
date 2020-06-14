@@ -4,12 +4,11 @@ import global from '@dojo/framework/shim/global';
 import { createCommandFactory, createProcess } from '@dojo/framework/stores/process';
 import { add } from '@dojo/framework/stores/state/operations';
 import Store from '@dojo/framework/stores/Store';
-
-import config from '../config';
+import { config } from '../config';
 import { State, User } from '../interfaces';
 
 const commandFactory = createCommandFactory<State>();
-const { title, prompt, choices } = config
+const { title, prompt, choices } = config;
 
 function isUser(value: any): value is User {
 	return value && typeof value === 'object' && typeof value.uuid === 'string';
@@ -21,8 +20,7 @@ function loadUserData(): User {
 		if (isUser(data)) {
 			return data;
 		}
-	}
-	catch (e) {}
+	} catch (e) {}
 
 	const user = { uuid: uuid() };
 	global.localStorage.setItem('user', JSON.stringify(user));
