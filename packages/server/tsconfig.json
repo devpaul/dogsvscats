@@ -1,17 +1,11 @@
 {
+	"extends": "../tsconfig.base.json",
 	"compilerOptions": {
 		"declaration": false,
 		"downlevelIteration": true,
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
-		"lib": [
-			"es5",
-			"dom",
-			"dom.iterable",
-			"es2015.collection",
-			"es2015.promise",
-			"esnext.asynciterable"
-		],
+		"lib": ["es5", "dom", "dom.iterable", "es2015.collection", "es2015.promise", "esnext.asynciterable"],
 		"outDir": "./output",
 		"module": "umd",
 		"moduleResolution": "node",

@@ -1,0 +1,20 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"lib": ["es5", "es6"],
+		"target": "ES2018",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"outDir": "./output/build",
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"sourceMap": true,
+		"strict": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"skipLibCheck": false,
+		"paths": {
+			"catsvsdogs": ["../../@types/catsvsdogs"]
+		}
+	}
+}
