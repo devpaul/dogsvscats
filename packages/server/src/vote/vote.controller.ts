@@ -1,27 +1,39 @@
-import { Body, Controller, Get, Header, HttpException, HttpStatus, Post } from '@nestjs/common';
-import { Vote } from 'catsvsdogs';
+import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
+import { ChoicesQueryDto } from './dto/ChoicesQueryDto';
+import { VoteDto } from './dto/VoteDto';
 import { VoteService } from './vote.service';
 
-function isVote(value: any): value is Vote {
-	return value && typeof value === 'object' && typeof value.userId === 'string' && typeof value.choice == 'string';
+interface VoteTotals {
+	[key: string]: number;
 }
 
-@Controller('api')
+@Controller('api/vote')
 export class VoteController {
 	constructor(private readonly voteService: VoteService) {}
 
 	@Get()
-	@Header('Cache-Control', 'none')
-	tallies() {
-		return this.voteService.getCount();
+	listChoices() {
+		return this.voteService.listChoices();
+	}
+
+	@Get('/total')
+	async tallies(@Query() { choices }: ChoicesQueryDto) {
+		const totals: VoteTotals = {};
+
+		for (let choice of choices) {
+			totals[choice] = await this.voteService.voteTotal(choice);
+		}
+
+		return totals;
 	}
 
 	@Post()
-	createRecord(@Body() vote: unknown) {
-		if (isVote(vote)) {
-			this.voteService.vote(vote);
-		} else {
-			throw new HttpException('invalid ballot', HttpStatus.BAD_REQUEST);
-		}
+	async recordVote(@Body() vote: VoteDto): Promise<void> {
+		await this.voteService.vote(vote);
+	}
+
+	@Delete()
+	async resetVote(@Query() { choices }: ChoicesQueryDto): Promise<void> {
+		await this.voteService.resetVotes(choices);
 	}
 }

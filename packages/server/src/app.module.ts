@@ -1,11 +1,10 @@
+import { createSqljsConfig } from '@catsvsdogs/persistence/src/config';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { VoteModule } from './vote/vote.module';
 
 @Module({
-	imports: [],
-	controllers: [AppController],
-	providers: [AppService]
+	imports: [TypeOrmModule.forRoot(createSqljsConfig()), VoteModule]
 })
 export class AppModule implements NestModule {
 	configure(consumer: MiddlewareConsumer): MiddlewareConsumer | void {

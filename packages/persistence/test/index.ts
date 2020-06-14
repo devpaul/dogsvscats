@@ -34,6 +34,10 @@ async function createMysql() {
 		new VoteEntity({
 			choice: 'burrito',
 			voterId: '2'
+		}),
+		new VoteEntity({
+			choice: 'taco',
+			voterId: '3'
 		})
 	];
 
@@ -44,7 +48,15 @@ async function createMysql() {
 
 	const savedVotes = await repo.find();
 	console.log(savedVotes);
-	console.log(savedVotes.length);
+	console.log('taco votes: ' + (await repo.count({ choice: 'taco' })));
+	console.log('burrito votes: ' + (await repo.count({ choice: 'burrito' })));
+
+	console.log(
+		await repo
+			.createQueryBuilder()
+			.select('DISTINCT choice')
+			.getRawMany()
+	);
 
 	con.close();
 })();

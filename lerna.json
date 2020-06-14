@@ -1,8 +1,9 @@
 {
 	"packages": [
 		"packages/client",
-		"packages/backend/*",
-		"packages/services/*"
+		"packages/persistence",
+		"packages/server",
+		"packages/server-netlify"
 	],
 	"version": "independent"
 }

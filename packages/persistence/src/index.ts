@@ -1,36 +1,15 @@
 import 'reflect-metadata';
-import { ConnectionOptions, createConnection } from 'typeorm';
-import { MysqlConnectionOptions } from 'typeorm/driver/mysql/MysqlConnectionOptions';
-import { SqljsConnectionOptions } from 'typeorm/driver/sqljs/SqljsConnectionOptions';
-import { UserEntity } from './entity/UserEntity';
-import { VoteEntity } from './entity/VoteEntity';
+import { createConnection } from 'typeorm';
+import { createMysqlConfig, createSqljsConfig, createSqljsDiskConfig } from './config';
 
-const baseConfig: Pick<ConnectionOptions, 'entities'> = {
-	entities: [VoteEntity, UserEntity]
-};
-
-export function sqljs(config: Omit<SqljsConnectionOptions, 'type'> = {}) {
-	return createConnection({
-		type: 'sqljs',
-		synchronize: true,
-		...baseConfig,
-		...config
-	});
+export function sqljs(config: Parameters<typeof createSqljsConfig>[0] = {}) {
+	return createConnection(createSqljsConfig(config));
 }
 
-type SqljsDiskConfig = Required<Pick<SqljsConnectionOptions, 'location'>> &
-	Omit<SqljsConnectionOptions, 'type' | 'location'>;
-
-export function sqljsDisk(config: SqljsDiskConfig) {
-	return sqljs(config);
+export function sqljsDisk(config: Parameters<typeof createSqljsDiskConfig>[0]) {
+	return createConnection(createSqljsDiskConfig(config));
 }
 
-type MysqlConfig = Omit<MysqlConnectionOptions, 'type'> &
-	Required<Pick<MysqlConnectionOptions, 'username' | 'password' | 'host' | 'port' | 'database'>>;
-
-export function mysql(config: MysqlConfig) {
-	return createConnection({
-		type: 'mysql',
-		...config
-	});
+export function mysql(config: Parameters<typeof createMysqlConfig>[0]) {
+	return createConnection(createMysqlConfig(config));
 }

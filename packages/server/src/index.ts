@@ -1,3 +1,4 @@
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { join } from 'path';
 import { AppModule } from './app.module';
@@ -8,6 +9,7 @@ const staticFiles = join(__dirname, '../..', 'client', 'output', source);
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
+	app.useGlobalPipes(new ValidationPipe({ transform: true }));
 	app.enableCors();
 	app.useStaticAssets(staticFiles);
 
