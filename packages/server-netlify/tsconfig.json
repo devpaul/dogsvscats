@@ -1,5 +1,5 @@
 {
-	"extends": "../../tsconfig.base.json",
+	"extends": "../tsconfig.base.json",
 	"compilerOptions": {
 		"baseUrl": ".",
 		"target": "ES2018",
@@ -8,6 +8,7 @@
 		"strict": true,
 		"esModuleInterop": true,
 		"skipLibCheck": true,
+		"experimentalDecorators": true,
 		"forceConsistentCasingInFileNames": true,
 		"paths": {
 			"catsvsdogs": ["../@types/catsvsdogs"]

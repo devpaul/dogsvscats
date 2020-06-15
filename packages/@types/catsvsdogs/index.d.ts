@@ -6,9 +6,9 @@ export type CharacterName = 'cat' | 'dog' | 'spock' | 'yoda' | 'trinity' | 'joli
 
 export type CharacterDisplay = 'pet' | 'faction';
 
-export type VoteResults = { [K in CharacterName]?: number };
+export type VoteResults = { [K in string]?: number };
 
 export interface Vote {
-	userId: string;
+	voterId: string;
 	choice: CharacterName;
 }
