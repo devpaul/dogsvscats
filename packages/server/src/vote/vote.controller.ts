@@ -7,7 +7,7 @@ interface VoteTotals {
 	[key: string]: number;
 }
 
-@Controller('api/vote')
+@Controller('/vote')
 export class VoteController {
 	constructor(private readonly voteService: VoteService) {}
 
