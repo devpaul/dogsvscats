@@ -3,7 +3,7 @@
 		"packages/client",
 		"packages/persistence",
 		"packages/server",
-		"packages/server-netlify"
+		"packages/netlify"
 	],
 	"version": "independent"
 }

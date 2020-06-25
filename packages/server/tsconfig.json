@@ -1,12 +1,13 @@
 {
 	"extends": "../tsconfig.base.json",
 	"compilerOptions": {
-		"declaration": false,
+		"baseUrl": ".",
+		"declaration": true,
 		"downlevelIteration": true,
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
 		"lib": ["ES2018"],
-		"outDir": "./output",
+		"outDir": "./output/src",
 		"module": "umd",
 		"moduleResolution": "node",
 		"noUnusedLocals": true,
@@ -15,6 +16,9 @@
 		"sourceMap": true,
 		"strict": true,
 		"target": "ES2018",
-		"skipLibCheck": true
+		"skipLibCheck": true,
+		"paths": {
+			"@catsvsdogs/persistence/*": ["../persistence/output/src/*"]
+		}
 	}
 }

@@ -1,22 +1,19 @@
-import { VoteEntity } from '@catsvsdogs/persistence/src/entity/VoteEntity';
+import { VoteEntity } from '@catsvsdogs/persistence/entity/VoteEntity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 
 @Injectable()
 export class VoteService {
 	constructor(@InjectRepository(VoteEntity) private voteRepository: Repository<VoteEntity>) {}
 
 	async listChoices() {
-		const result = await this.voteRepository
-			.createQueryBuilder()
-			.select('DISTINCT choice')
-			.getRawMany();
+		const result = await this.voteRepository.createQueryBuilder().select('DISTINCT choice').getRawMany();
 
 		return result.map((row) => row.choice);
 	}
 
-	resetVotes(choices: string[]) {
+	resetVotes(choices: string[]): Promise<DeleteResult> {
 		return this.voteRepository
 			.createQueryBuilder()
 			.delete()

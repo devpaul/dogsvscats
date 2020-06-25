@@ -4,14 +4,15 @@
 		"baseUrl": ".",
 		"target": "ES2018",
 		"module": "commonjs",
-		"outDir": "./output/build",
+		"outDir": "./output/src",
 		"strict": true,
 		"esModuleInterop": true,
 		"skipLibCheck": true,
 		"experimentalDecorators": true,
 		"forceConsistentCasingInFileNames": true,
 		"paths": {
-			"catsvsdogs": ["../@types/catsvsdogs"]
+			"catsvsdogs": ["../@types/catsvsdogs"],
+			"@catsvsdogs/server/*": ["../server/output/src/*"]
 		}
 	}
 }

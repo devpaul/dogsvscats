@@ -1,4 +1,4 @@
-import { mysql, sqljs as createSqljs } from '../src';
+import { mysql, sqljs as createSqljs } from '../src/connection';
 import { VoteEntity } from '../src/entity/VoteEntity';
 
 function throwRequired(fieldName: string): never {

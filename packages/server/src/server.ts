@@ -8,7 +8,7 @@ const PORT = 3000;
 const source = process.env.NODE_ENV === 'dev' ? 'dev' : 'dist';
 const staticFiles = join(__dirname, '../..', 'client', 'output', source);
 
-async function bootstrap() {
+export async function start() {
 	const server = express();
 	const app = await NestFactory.create(AppModule, server);
 	app.setGlobalPrefix('/api');
@@ -20,4 +20,3 @@ async function bootstrap() {
 	console.log(`serving files from ${staticFiles}`);
 	console.log(`server started on port ${PORT}`);
 }
-bootstrap();

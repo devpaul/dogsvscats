@@ -5,7 +5,7 @@
 		"target": "ES2018",
 		"module": "commonjs",
 		"moduleResolution": "node",
-		"outDir": "./output/build",
+		"outDir": "./output",
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
 		"sourceMap": true,
@@ -13,8 +13,9 @@
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"skipLibCheck": false,
+		"declaration": true,
 		"paths": {
-			"catsvsdogs": ["../../@types/catsvsdogs"]
+			"catsvsdogs": ["../@types/catsvsdogs"]
 		}
 	}
 }
