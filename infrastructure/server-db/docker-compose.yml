@@ -1,11 +1,15 @@
-version: "3.0"
+version: '3.0'
 services:
   web:
     build:
       context: ../..
+    depends_on:
+      - db
     ports:
-      - "3000:3000"
+      - '3000:3000'
     env_file: .env
   db:
     image: mariadb
     env_file: .env
+    ports:
+      - '3306'
