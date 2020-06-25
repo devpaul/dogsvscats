@@ -1,22 +1,45 @@
-import { ValidationPipe } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
-import * as express from 'express';
-import { join } from 'path';
-import { AppModule } from './app.module';
+import { HttpServer, ValidationPipe } from "@nestjs/common";
+import { NestApplicationOptions } from "@nestjs/common/interfaces/nest-application-options.interface";
+import { FastifyAdapter, NestFactory } from "@nestjs/core";
+import * as express from "express";
+import { Express } from "express";
+import { createAppModule, CreateAppModuleConfig } from "./app";
 
-const PORT = 3000;
-const source = process.env.NODE_ENV === 'dev' ? 'dev' : 'dist';
-const staticFiles = join(__dirname, '../..', 'client', 'output', source);
+export interface CreateNestAppConfig extends CreateAppModuleConfig {
+	options?: NestApplicationOptions;
+	server: HttpServer | FastifyAdapter | Express;
+	prefix?: string;
+}
 
-export async function start() {
-	const server = express();
-	const app = await NestFactory.create(AppModule, server);
-	app.setGlobalPrefix('/api');
+export async function createNestApp({
+	server,
+	options,
+	modules,
+	prefix = "/api",
+	ormOptions,
+}: CreateNestAppConfig) {
+	const AppModule = createAppModule({ modules, ormOptions });
+	const app = await NestFactory.create(AppModule, server, options);
+	app.setGlobalPrefix(prefix);
 	app.useGlobalPipes(new ValidationPipe({ transform: true }));
 	app.enableCors();
-	app.useStaticAssets(staticFiles);
+	return app;
+}
 
-	await app.listen(PORT);
-	console.log(`serving files from ${staticFiles}`);
-	console.log(`server started on port ${PORT}`);
+export interface StartConfig {
+	port: number;
+	files: string;
+	ormOptions: CreateNestAppConfig["ormOptions"];
+}
+
+export async function start({ port, files, ormOptions }: StartConfig) {
+	const server = express();
+	const app = await createNestApp({
+		server,
+		ormOptions,
+	});
+	app.useStaticAssets(files);
+
+	await app.listen(port);
+	console.log(`server started on port ${port}`);
 }

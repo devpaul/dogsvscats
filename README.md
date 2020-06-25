@@ -14,10 +14,10 @@ This repository contains both the client and server for cats vs dogs located in 
 
 ### Quick Start
 
-* run `npm install` to install all dependencies
-* to build the client run `npm run build`
-* to start the server run `npm run start`
-* open http://localhost:3000
+-   run `npm install` to install all dependencies
+-   to build the client run `npm run build`
+-   to start the server run `npm run start`
+-   open http://localhost:3000
 
 ### Deploy
 
@@ -71,16 +71,16 @@ The server uses `ts-node` and does not require a build to start. Use `npm run st
 
 ## Acknowledgements
 
-* Cat & Dog created by [Terdpongvector](https://www.freepik.com/terdpongvector)
-* [Meow sound](https://freesound.org/people/tuberatanka/sounds/110011/) created by Tuberatanka
-* [Bark sound](https://www.soundsnap.com/audio/mp3/248977/Large%20Dog%20Bark%203.mp3) by Soundsnap
-* [Yoda Image source](https://bankkita.com/images/yoda-clipart-small-3.jpg)
-* [Spock image](https://www.deviantart.com/zombiedaisuke/art/StarTrek-Chibi-KS-145877655) by [Zombie Daisuke](https://www.deviantart.com/zombiedaisuke)
-* [Yoda Audio](http://www.realmofdarkness.net/sb/sw-yoda/) from Realm of Darkness soundboard
-* [Starfleet logo](https://upload.wikimedia.org/wikipedia/commons/6/66/USS_Enterprise_Patch.svg) Wikipedia
-* [Rebel logo](https://upload.wikimedia.org/wikipedia/commons/2/2a/Rebel_Alliance_logo.svg) Wikipedia
+-   Cat & Dog created by [Terdpongvector](https://www.freepik.com/terdpongvector)
+-   [Meow sound](https://freesound.org/people/tuberatanka/sounds/110011/) created by Tuberatanka
+-   [Bark sound](https://www.soundsnap.com/audio/mp3/248977/Large%20Dog%20Bark%203.mp3) by Soundsnap
+-   [Yoda Image source](https://bankkita.com/images/yoda-clipart-small-3.jpg)
+-   [Spock image](https://www.deviantart.com/zombiedaisuke/art/StarTrek-Chibi-KS-145877655) by [Zombie Daisuke](https://www.deviantart.com/zombiedaisuke)
+-   [Yoda Audio](http://www.realmofdarkness.net/sb/sw-yoda/) from Realm of Darkness soundboard
+-   [Starfleet logo](https://upload.wikimedia.org/wikipedia/commons/6/66/USS_Enterprise_Patch.svg) Wikipedia
+-   [Rebel logo](https://upload.wikimedia.org/wikipedia/commons/2/2a/Rebel_Alliance_logo.svg) Wikipedia
 
-[Dojo]: https://dojo.io/
-[Dojo CLI]: https://github.com/dojo/cli
-[NestJS]: https://nestjs.com
-[Now]: (https://zeit.co/now)
+[dojo]: https://dojo.io/
+[dojo cli]: https://github.com/dojo/cli
+[nestjs]: https://nestjs.com
+[now]: (https://zeit.co/now)

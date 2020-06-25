@@ -1,0 +1,11 @@
+version: "3.0"
+services:
+  web:
+    build:
+      context: ../..
+    ports:
+      - "3000:3000"
+    env_file: .env
+  db:
+    image: mariadb
+    env_file: .env

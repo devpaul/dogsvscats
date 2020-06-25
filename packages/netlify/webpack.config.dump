@@ -1,0 +1,151 @@
+module.exports = () => ({
+  mode: 'production',
+  resolve: {
+    extensions: [ '.wasm', '.mjs', '.js', '.json', '.ts' ],
+    mainFields: [ 'module', 'main' ],
+    plugins: [
+      {
+        source: 'described-resolve',
+        target: 'resolve',
+        extensions: [ '.ts', '.tsx' ],
+        log: {},
+        baseUrl: '.',
+        absoluteBaseUrl: '/mnt/raid/sambashare/paul/src/catsvsdogs/packages/netlify'
+      }
+    ],
+    unsafeCache: true,
+    modules: [ 'node_modules' ],
+    mainFiles: [ 'index' ],
+    cacheWithContext: true
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(m?js|ts)?$/,
+        exclude: /(node_modules|bower_components|\.(test|spec)\.?)/,
+        use: {
+          loader: '/mnt/raid/sambashare/paul/src/catsvsdogs/packages/netlify/node_modules/babel-loader/lib/index.js',
+          options: {
+            cacheDirectory: true,
+            presets: [
+              [
+                '/mnt/raid/sambashare/paul/src/catsvsdogs/packages/netlify/node_modules/@babel/preset-env/lib/index.js',
+                { targets: { node: '8.15.0' } }
+              ]
+            ],
+            plugins: [
+              '/mnt/raid/sambashare/paul/src/catsvsdogs/packages/netlify/node_modules/@babel/plugin-proposal-class-properties/lib/index.js',
+              '/mnt/raid/sambashare/paul/src/catsvsdogs/packages/netlify/node_modules/@babel/plugin-transform-object-assign/lib/index.js',
+              '/mnt/raid/sambashare/paul/src/catsvsdogs/packages/netlify/node_modules/@babel/plugin-proposal-object-rest-spread/lib/index.js'
+            ],
+            babelrc: true
+          }
+        }
+      },
+      {
+        test: /\.(m?js|ts)?$/,
+        use: {
+          loader: 'ts-loader',
+          options: {
+            configFile: '/mnt/raid/sambashare/paul/src/catsvsdogs/packages/netlify/tsconfig.json'
+          }
+        }
+      }
+    ],
+    unknownContextRequest: '.',
+    unknownContextRecursive: true,
+    unknownContextCritical: true,
+    exprContextRequest: '.',
+    exprContextRecursive: true,
+    exprContextCritical: true,
+    wrappedContextRegExp: /.*/,
+    wrappedContextRecursive: true,
+    defaultRules: [
+      { type: 'javascript/auto', resolve: {} },
+      {
+        test: /\.mjs$/i,
+        type: 'javascript/esm',
+        resolve: { mainFields: [ 'main' ] }
+      },
+      { test: /\.json$/i, type: 'json' },
+      { test: /\.wasm$/i, type: 'webassembly/experimental' }
+    ]
+  },
+  context: '/mnt/raid/sambashare/paul/src/catsvsdogs/packages/netlify/output/src/lambda',
+  entry: { vote: './vote.js' },
+  target: 'node',
+  plugins: [
+    { options: { resourceRegExp: /vertx/ } },
+    { definitions: {} },
+    { outputPath: './', name: 'webpack.config.dump', depth: 12 }
+  ],
+  output: {
+    path: '/mnt/raid/sambashare/paul/src/catsvsdogs/packages/netlify/dist/api',
+    filename: '[name].js',
+    libraryTarget: 'commonjs',
+    chunkFilename: '[name].js',
+    webassemblyModuleFilename: '[modulehash].module.wasm',
+    hotUpdateFunction: 'webpackHotUpdate',
+    jsonpFunction: 'webpackJsonp',
+    chunkCallbackName: 'webpackChunk',
+    globalObject: 'global',
+    sourceMapFilename: '[file].map[query]',
+    hotUpdateChunkFilename: '[id].[hash].hot-update.js',
+    hotUpdateMainFilename: '[hash].hot-update.json',
+    chunkLoadTimeout: 120000,
+    hashFunction: 'md4',
+    hashDigest: 'hex',
+    hashDigestLength: 20
+  },
+  optimization: {
+    nodeEnv: 'production',
+    removeAvailableModules: true,
+    removeEmptyChunks: true,
+    mergeDuplicateChunks: true,
+    flagIncludedChunks: true,
+    occurrenceOrder: true,
+    sideEffects: true,
+    providedExports: true,
+    usedExports: true,
+    concatenateModules: true,
+    splitChunks: {
+      hidePathInfo: true,
+      chunks: 'async',
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      automaticNameDelimiter: '~',
+      automaticNameMaxLength: 109,
+      maxInitialRequests: 3,
+      name: true,
+      cacheGroups: {
+        default: { reuseExistingChunk: true, minChunks: 2, priority: -20 },
+        vendors: {
+          automaticNamePrefix: 'vendors',
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
+        }
+      }
+    },
+    noEmitOnErrors: true,
+    checkWasmTypes: true,
+    minimize: true,
+    minimizer: [ {} ]
+  },
+  bail: true,
+  node: {
+    process: true,
+    global: true,
+    Buffer: true,
+    setImmediate: true,
+    __filename: 'mock',
+    __dirname: 'mock'
+  },
+  resolveLoader: {
+    unsafeCache: true,
+    mainFields: [ 'loader', 'main' ],
+    extensions: [ '.js', '.json' ],
+    mainFiles: [ 'index' ]
+  },
+  infrastructureLogging: { level: 'info' }
+})

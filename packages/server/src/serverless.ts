@@ -1,22 +1,27 @@
-import { ValidationPipe } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
-import * as express from 'express';
-import * as serverless from 'serverless-http';
-import { Handler } from 'serverless-http';
+import * as express from "express";
+import * as serverless from "serverless-http";
+import { Handler } from "serverless-http";
+import { CreateAppModuleConfig } from "./app";
+import { createNestApp } from "./server";
 
-export interface Config {
+export interface CreateHandlerConfig extends CreateAppModuleConfig {
 	prefix: string;
 }
 
-export async function createHandler(Module: any, { prefix }: Config): Promise<Handler> {
-	const app = express();
-	const nest = await NestFactory.create(Module, app);
-	nest.setGlobalPrefix(prefix);
-	nest.useGlobalPipes(new ValidationPipe({ transform: true }));
-	nest.enableCors();
+export function createHandler(config: CreateHandlerConfig): Handler {
+	async function init() {
+		const server = express();
+		const app = await createNestApp({
+			server,
+			...config,
+		});
+		await app.init();
+		return serverless(server);
+	}
 
-	await nest.init();
+	const handler = init();
 
-	const handler = serverless(app);
-	return handler;
+	return async (event, context) => {
+		return (await handler)(event, context);
+	};
 }

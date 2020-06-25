@@ -9,6 +9,7 @@
     "clean": "shx rm -rf output",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node -r tsconfig-paths/register ./src/main.ts",
+    "start:disk": "cross-env ORM_TYPE=disk ts-node -r tsconfig-paths/register ./src/main.ts",
     "start:dev": "cross-env NODE_ENV=dev ts-node -r tsconfig-paths/register ./src/main.ts"
   },
   "author": "Paul Shannon",
