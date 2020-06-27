@@ -1,6 +1,7 @@
 {
   "name": "@catsvsdogs/persistence",
   "version": "1.0.0",
+  "main": "./src/index.ts",
   "description": "Persistence layer for CatsVsDogs",
   "devDependencies": {
     "@types/node": "^8.0.29",
@@ -13,6 +14,7 @@
   },
   "dependencies": {
     "express": "^4.17.1",
+    "is-port-reachable": "^3.0.0",
     "mysql": "^2.18.1",
     "reflect-metadata": "^0.1.10",
     "serverless": "^1.73.1",
@@ -27,6 +29,7 @@
   "scripts": {
     "build": "tsc",
     "clean": "shx rm -rf dist output",
+    "migrate": "ts-node .",
     "start": "ts-node test/index.ts",
     "watch": "tsc --watch"
   }

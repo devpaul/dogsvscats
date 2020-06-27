@@ -9,5 +9,4 @@ const config = {
 	files: STATIC_FILES,
 	ormOptions: ORM_CONFIG,
 };
-
 start(config);

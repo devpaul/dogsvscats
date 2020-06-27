@@ -8,7 +8,7 @@
     "build": "tsc",
     "clean": "shx rm -rf output",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node -r tsconfig-paths/register ./src/main.ts",
+    "start": "ts-node --project ./tsconfig.json --files -r tsconfig-paths/register ./src/main.ts",
     "start:disk": "cross-env ORM_TYPE=disk ts-node -r tsconfig-paths/register ./src/main.ts",
     "start:dev": "cross-env NODE_ENV=dev ts-node -r tsconfig-paths/register ./src/main.ts"
   },
@@ -32,6 +32,7 @@
     "class-transformer": "0.2.3",
     "class-validator": "^0.12.2",
     "express": "^4.17.1",
+    "is-port-reachable": "^3.0.0",
     "mysql": "^2.18.1",
     "reflect-metadata": "^0.1.12",
     "serverless": "^1.73.1",

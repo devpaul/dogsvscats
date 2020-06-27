@@ -4,3 +4,5 @@ dist
 .cert/
 .idea/
 .env
+.scratch/
+lerna-debug.log
