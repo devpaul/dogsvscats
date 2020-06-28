@@ -12,3 +12,5 @@ export function sqljsDisk(config: Parameters<typeof createSqljsDiskConfig>[0]) {
 export function mysql(config: Parameters<typeof createMysqlConfig>[0]) {
 	return createConnection(createMysqlConfig(config));
 }
+
+export { createConnection };

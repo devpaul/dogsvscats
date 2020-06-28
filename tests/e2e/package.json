@@ -10,6 +10,7 @@
   "license": "GPL-3.0",
   "dependencies": {
     "@types/cucumber": "^6.0.1",
+    "barrelsby": "^2.2.0",
     "chai": "^4.2.0",
     "cucumber": "^6.0.5",
     "is-port-reachable": "^3.0.0",

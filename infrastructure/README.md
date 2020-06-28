@@ -18,13 +18,3 @@ Runs a monolithic server with [Nestjs] and persists data to a file using [sqljs]
 Runs a monolithic server with [Nestjs] and persists data to a mysql database
 
 -   docker compose creates a server container and a database container using [Mariadb]
-
-## server + external db (WIP)
-
-Runs a monolithic server with [Nestjs] and persists data to an external mysql database
-
--   .env needs to be updated with credentials for your external database
-
-## server + db (WIP)
-
-Runs a serverless system using [serverless] and [Nestjs] and persists data to a mysql database

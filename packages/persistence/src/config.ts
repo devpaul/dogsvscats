@@ -1,47 +1,41 @@
-import { EntitySchema } from "typeorm";
-import { MysqlConnectionOptions } from "typeorm/driver/mysql/MysqlConnectionOptions";
-import { SqljsConnectionOptions } from "typeorm/driver/sqljs/SqljsConnectionOptions";
-import { UserEntity } from "./entity/UserEntity";
-import { VoteEntity } from "./entity/VoteEntity";
+import { BaseConnectionOptions } from 'typeorm/connection/BaseConnectionOptions';
+import { MysqlConnectionOptions } from 'typeorm/driver/mysql/MysqlConnectionOptions';
+import { SqljsConnectionOptions } from 'typeorm/driver/sqljs/SqljsConnectionOptions';
+import * as entities from './entity';
+import * as migrations from './migration';
 
-export type CreateSqljsConfig = Omit<SqljsConnectionOptions, "type">;
+export type CreateSqljsConfig = Omit<SqljsConnectionOptions, 'type'>;
 
-export function getEntities(): (EntitySchema<any> | Function)[] {
-	return [VoteEntity, UserEntity];
+export function getBaseOptions(): Pick<BaseConnectionOptions, 'entities' | 'migrations'> {
+	return {
+		migrations: Object.values(migrations),
+		entities: Object.values(entities),
+	};
 }
 
-export function createSqljsConfig(
-	config: CreateSqljsConfig = {}
-): SqljsConnectionOptions {
+export function createSqljsConfig(config: CreateSqljsConfig = {}): SqljsConnectionOptions {
 	return {
-		type: "sqljs",
+		type: 'sqljs',
 		synchronize: true,
-		entities: getEntities(),
+		...getBaseOptions(),
 		...config,
 	};
 }
 
-type SqljsDiskConfig = Required<Pick<SqljsConnectionOptions, "location">> &
-	Omit<SqljsConnectionOptions, "type" | "location">;
+type SqljsDiskConfig = Required<Pick<SqljsConnectionOptions, 'location'>> &
+	Omit<SqljsConnectionOptions, 'type' | 'location'>;
 
-export function createSqljsDiskConfig(
-	config: SqljsDiskConfig
-): SqljsConnectionOptions {
+export function createSqljsDiskConfig(config: SqljsDiskConfig): SqljsConnectionOptions {
 	return createSqljsConfig(config);
 }
 
-type MysqlConfig = Omit<MysqlConnectionOptions, "type"> &
-	Required<
-		Pick<
-			MysqlConnectionOptions,
-			"username" | "password" | "host" | "database"
-		>
-	>;
+type MysqlConfig = Omit<MysqlConnectionOptions, 'type'> &
+	Required<Pick<MysqlConnectionOptions, 'username' | 'password' | 'host' | 'database'>>;
 
 export function createMysqlConfig(config: MysqlConfig): MysqlConnectionOptions {
 	return {
-		type: "mysql",
-		entities: getEntities(),
+		type: 'mysql',
+		...getBaseOptions(),
 		...config,
 	};
 }

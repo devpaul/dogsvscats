@@ -24,13 +24,18 @@ export class VoteService {
 	async vote(vote: ConstructorParameters<typeof VoteEntity>[0]) {
 		const entity = new VoteEntity(vote);
 
-		await this.voteRepository
-			.createQueryBuilder()
-			.insert()
-			.values(vote)
-			.onConflict(`("voterId") DO UPDATE SET "choice" = :choice`)
-			.setParameter('choice', entity.choice)
-			.execute();
+		const previous = await this.getVote(vote.voterId);
+
+		if (previous) {
+			previous.choice = vote.choice;
+			return this.voteRepository.save(previous);
+		} else {
+			return this.voteRepository.save(entity);
+		}
+	}
+
+	getVote(voterId: string) {
+		return this.voteRepository.findOne({ voterId });
 	}
 
 	voteTotal(choice: string) {

@@ -13,6 +13,7 @@
     "typescript": "3.9.5"
   },
   "dependencies": {
+    "barrelsby": "^2.2.0",
     "express": "^4.17.1",
     "is-port-reachable": "^3.0.0",
     "mysql": "^2.18.1",
@@ -27,9 +28,15 @@
     "webpack-config-dump-plugin": "^2.0.3"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "run-s build:barrels build:ts",
+    "build:ts": "tsc",
+    "build:barrels": "run-s build:migrations build:entities",
+    "build:migrations": "barrelsby --delete -d ./src/migration",
+    "build:entities": "barrelsby --delete -d ./src/entity",
     "clean": "shx rm -rf dist output",
-    "migrate": "ts-node .",
+    "create:migration": "typeorm migration:create -n catsvsdogs",
+    "migrate": "run-s build:migrations run:migrate",
+    "run:migrate": "ts-node .",
     "start": "ts-node test/index.ts",
     "watch": "tsc --watch"
   }

@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('vote')
 export class VoteEntity {
 	constructor(values: Omit<VoteEntity, 'id'>) {
 		Object.assign(this, values);
