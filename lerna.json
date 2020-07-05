@@ -3,8 +3,7 @@
 		"packages/client",
 		"packages/persistence",
 		"packages/server",
-		"packages/netlify",
 		"tests/*"
 	],
-	"version": "independent"
+	"version": "1.0.0"
 }

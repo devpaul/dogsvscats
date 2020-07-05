@@ -13,7 +13,7 @@ Runs a monolithic server with [Nestjs] and persists data to a file using [sqljs]
 -   The file is stored in `/var/lib/sqljs`
 -   `/var/lib/sqljs` is a docker volume that will maintain data even the server container is rebuilt
 
-## server + db (WIP)
+## server + db
 
 Runs a monolithic server with [Nestjs] and persists data to a mysql database
 
